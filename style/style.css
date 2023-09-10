@@ -275,6 +275,8 @@ color:var(--secondary-color);
     margin-left: 20px;
     
 }
+
+
 section.contact{
     height:100vh;
    color:var(--primary-color);
@@ -703,3 +705,5 @@ section.testimonials{
     }
 
 }   
+
+
