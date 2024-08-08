@@ -387,9 +387,15 @@ flex-direction: column;
 }
 .skills-container{
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
     flex-wrap: wrap;
     margin-bottom: 1rem;
+    margin-block: 2rem;
+}
+.skillImage{
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
 }
 
 /*  background shapes*/
@@ -663,6 +669,13 @@ section.testimonials{
     .dropdown-content {
     left:35%
       }
+      .skills-container{
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+        margin-block: 2rem;
+    }
    
 }
 

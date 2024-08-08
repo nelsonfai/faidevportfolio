@@ -11,11 +11,12 @@
     {
         "title": "Habts Us",
         "image": "images/habstus.png",
-        "alt": "Screenshot of Habts Us app",
-        "description": "Habts Us is a mobile app crafted to foster growth, accountability, and productivity within relationships. With features like Habit Tracker, Shared To-Do List, and Shared Notes, couples can cultivate healthier habits, collaborate effectively, and strengthen their emotional connection. Download now and unlock the full potential of your relationship with Habts Us!",
+        "alt": "Screenshot of the Habts Us app",
+        "description": "Habts Us is a mobile app designed to enhance growth, accountability, and productivity in relationships. It features a Habit Tracker, Shared To-Do List, and Shared Notes, enabling couples to build healthier habits, collaborate efficiently, and strengthen their emotional bonds. The app is still under development, but a preview is available via the link below.",
         "technologies": "React Native, Django Rest Framework, Glassify SDK",
         "liveUrl": "https://habts.us",
-        "githubUrl": null
+        "githubUrl": null,
+        "screenshot": "https://app.milanote.com/1RH9Ky191bEn7Z?p=s6T3b2fZp6Q"
     },
     {
         "title": "Fai Dev Studios (my Freelance Developer Portfolio)",
@@ -36,12 +37,12 @@
         "githubUrl": "https://github.com/nelsonfai/django_apjot"
     },
     {
-        "title": "Pryclet - price tracking",
-        "image": "images/pryclet.png",
-        "alt": "Pryclet homepage screenshot",
-        "description": "Pryclet - price tracking is a price tracking web app that allows users to track product prices across multiple E-commerce sites (e.g., Ikea, Amazon, Zalando, etc.). Users are sent notifications by mail when product prices drop to their desired price.",
-        "technologies": "HTML, CSS, JavaScript, Amazon PA API, Twilio, Chrome driver",
-        "liveUrl": "https://faipricetracker.pythonanywhere.com",
-        "githubUrl": "https://github.com/nelsonfai/pricetracker"
+        "title": "OneClick-Med",
+        "image": "images/oneclickmed.png",
+        "alt": "OneClick-Med homepage screenshot",
+        "description": "OneClick-Med is a top-rated digital health platform in Africa aimed at eliminating queues, multiple registrations, and inconsistent medical records. The platform centralizes patient data management, enhancing inter-connectivity across the healthcare ecosystem for superior patient care.",
+        "technologies": "Next Js,Firebase,tailwind css ",
+        "liveUrl": "https://www.oneclickmed.ng",
+        "githubUrl": null
     }
 ]

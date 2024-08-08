@@ -1,73 +1,73 @@
 [
     {
         "name": "HTML5",
-        "icon": "https://img.icons8.com/ios-glyphs/40/808080/html-5.png",
+        "icon": "images/skill-icons/html-124-svgrepo-com.svg",
         "alt": "iconhtml",
         "category": "Frontend"
     },
     {
         "name": "CSS3",
-        "icon": "https://img.icons8.com/ios-glyphs/40/808080/css3.png",
+        "icon": "images/skill-icons/css3-02-svgrepo-com.svg",
         "alt": "iconcss",
         "category": "Frontend"
     },
     {
         "name": "JavaScript",
-        "icon": "https://img.icons8.com/ios-filled/40/808080/javascript-logo.png",
+        "icon": "images/skill-icons/js-svgrepo-com.svg",
         "alt": "iconjs",
         "category": "Frontend"
     },
     {
         "name": "Python",
-        "icon": "https://img.icons8.com/ios-filled/40/808080/python.png",
+        "icon": "images/skill-icons/python-svgrepo-com.svg",
         "alt": "iconpy",
         "category": "Backend"
     },
     {
         "name": "Django",
-        "icon": "https://img.icons8.com/ios-filled/40/808080/django.png",
+        "icon": "images/skill-icons/django-svgrepo-com.svg",
         "alt": "icondj",
         "category": "Backend"
     },
     {
         "name": "React Native",
-        "icon": "https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/40/808080/external-react-social-media-tanah-basah-basic-outline-tanah-basah.png",
+        "icon": "images/skill-icons/react-svgrepo-com.svg",
         "alt": "external-react-social-media-tanah-basah-basic-outline-tanah-basah",
         "category": "Frontend"
     },
     {
         "name": "React",
-        "icon": "https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/40/808080/external-react-social-media-tanah-basah-basic-outline-tanah-basah.png",
+        "icon": "images/skill-icons/react-svgrepo-com.svg",
         "alt": "external-react-social-media-tanah-basah-basic-outline-tanah-basah",
         "category": "Frontend"
     },
     {
         "name": "Next.js",
-        "icon": "https://img.icons8.com/ios-filled/40/808080/nextjs.png",
+        "icon": "images/skill-icons/next-js-svgrepo-com.svg",
         "alt": "iconnextjs",
         "category": "Frontend"
     },
     {
         "name": "Tailwind CSS",
-        "icon": "https://img.icons8.com/ios-filled/40/808080/tailwindcss.png",
+        "icon": "images/skill-icons/tailwindcss-svgrepo-com.svg",
         "alt": "icontailwindcss",
         "category": "Frontend"
     },
     {
         "name": "Figma",
-        "icon": "https://img.icons8.com/ios-filled/40/808080/figma--v1.png",
+        "icon": "images/skill-icons/figma-svgrepo-com.svg",
         "alt": "iconfigma",
         "category": "Design"
     },
     {
         "name": "Illustrator",
-        "icon": "https://img.icons8.com/ios-filled/40/808080/adobe-illustrator.png",
+        "icon": "images/skill-icons/adobeillustrator-svgrepo-com.svg",
         "alt": "iconai",
         "category": "Design"
     },
     {
         "name": "Indesign",
-        "icon": "https://img.icons8.com/ios-filled/40/808080/adobe-indesign.png",
+        "icon": "images/skill-icons/indesign-svgrepo-com.svg",
         "alt": "iconid",
         "category": "Design"
     }
