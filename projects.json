@@ -1,0 +1,47 @@
+[
+    {
+        "title": "My agricDiary",
+        "image": "images/home_myagricdiary.png",
+        "alt": "myagricdiary",
+        "description": "This project was inspired by a need for efficiency and development in the Agricultural sector in my home country Cameroon. My agricDiary serves as a social networking site for all involved in the agricultural sector, providing users with the necessary information [for example weather information, agricultural news, Market price updates to enable a good harvest and a Marketplace to advertise and sell their products.",
+        "technologies": "HTML, CSS, JavaScript, Django, Python",
+        "liveUrl": "https://farmtest-xqjg.onrender.com",
+        "githubUrl": "https://github.com/nelsonfai/farmsocial"
+    },
+    {
+        "title": "Habts Us",
+        "image": "images/habstus.png",
+        "alt": "Screenshot of Habts Us app",
+        "description": "Habts Us is a mobile app crafted to foster growth, accountability, and productivity within relationships. With features like Habit Tracker, Shared To-Do List, and Shared Notes, couples can cultivate healthier habits, collaborate effectively, and strengthen their emotional connection. Download now and unlock the full potential of your relationship with Habts Us!",
+        "technologies": "React Native, Django Rest Framework, Glassify SDK",
+        "liveUrl": "https://habts.us",
+        "githubUrl": null
+    },
+    {
+        "title": "Fai Dev Studios (my Freelance Developer Portfolio)",
+        "image": "images/faidevstudios-home.png",
+        "alt": "Fai Dev Studios homepage",
+        "description": "Fai Dev studios serves as a portfolio website for my Freelance development work. It contains all my completed client projects, UI and UX Designs.",
+        "technologies": "HTML, CSS, JavaScript",
+        "liveUrl": "https://6469da674c260d44c5ba49a1--funny-churros-3d9794.netlify.app",
+        "githubUrl": null
+    },
+    {
+        "title": "Apjot",
+        "image": "images/apjot-home.png",
+        "alt": "Apjot homepage screenshot",
+        "description": "Inspired by my love for writing, Apjot (A public journal of thoughts) is a blog website with a fully integrated content management system for both Blog posts and Podcast episodes. It will serve as a home for my write-ups and in the future, a place for others to do the same. Blog Posts are added dynamically from the Django database while Podcast episodes are embedded dynamically from Spotify. Both sections come with like and comment functionalities.",
+        "technologies": "React, CSS, Appwrite API, Cloudinary (static file storage)",
+        "liveUrl": "https://my-apjot-production.up.railway.app",
+        "githubUrl": "https://github.com/nelsonfai/django_apjot"
+    },
+    {
+        "title": "Pryclet - price tracking",
+        "image": "images/pryclet.png",
+        "alt": "Pryclet homepage screenshot",
+        "description": "Pryclet - price tracking is a price tracking web app that allows users to track product prices across multiple E-commerce sites (e.g., Ikea, Amazon, Zalando, etc.). Users are sent notifications by mail when product prices drop to their desired price.",
+        "technologies": "HTML, CSS, JavaScript, Amazon PA API, Twilio, Chrome driver",
+        "liveUrl": "https://faipricetracker.pythonanywhere.com",
+        "githubUrl": "https://github.com/nelsonfai/pricetracker"
+    }
+]

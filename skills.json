@@ -1,0 +1,74 @@
+[
+    {
+        "name": "HTML5",
+        "icon": "https://img.icons8.com/ios-glyphs/40/808080/html-5.png",
+        "alt": "iconhtml",
+        "category": "Frontend"
+    },
+    {
+        "name": "CSS3",
+        "icon": "https://img.icons8.com/ios-glyphs/40/808080/css3.png",
+        "alt": "iconcss",
+        "category": "Frontend"
+    },
+    {
+        "name": "JavaScript",
+        "icon": "https://img.icons8.com/ios-filled/40/808080/javascript-logo.png",
+        "alt": "iconjs",
+        "category": "Frontend"
+    },
+    {
+        "name": "Python",
+        "icon": "https://img.icons8.com/ios-filled/40/808080/python.png",
+        "alt": "iconpy",
+        "category": "Backend"
+    },
+    {
+        "name": "Django",
+        "icon": "https://img.icons8.com/ios-filled/40/808080/django.png",
+        "alt": "icondj",
+        "category": "Backend"
+    },
+    {
+        "name": "React Native",
+        "icon": "https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/40/808080/external-react-social-media-tanah-basah-basic-outline-tanah-basah.png",
+        "alt": "external-react-social-media-tanah-basah-basic-outline-tanah-basah",
+        "category": "Frontend"
+    },
+    {
+        "name": "React",
+        "icon": "https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/40/808080/external-react-social-media-tanah-basah-basic-outline-tanah-basah.png",
+        "alt": "external-react-social-media-tanah-basah-basic-outline-tanah-basah",
+        "category": "Frontend"
+    },
+    {
+        "name": "Next.js",
+        "icon": "https://img.icons8.com/ios-filled/40/808080/nextjs.png",
+        "alt": "iconnextjs",
+        "category": "Frontend"
+    },
+    {
+        "name": "Tailwind CSS",
+        "icon": "https://img.icons8.com/ios-filled/40/808080/tailwindcss.png",
+        "alt": "icontailwindcss",
+        "category": "Frontend"
+    },
+    {
+        "name": "Figma",
+        "icon": "https://img.icons8.com/ios-filled/40/808080/figma--v1.png",
+        "alt": "iconfigma",
+        "category": "Design"
+    },
+    {
+        "name": "Illustrator",
+        "icon": "https://img.icons8.com/ios-filled/40/808080/adobe-illustrator.png",
+        "alt": "iconai",
+        "category": "Design"
+    },
+    {
+        "name": "Indesign",
+        "icon": "https://img.icons8.com/ios-filled/40/808080/adobe-indesign.png",
+        "alt": "iconid",
+        "category": "Design"
+    }
+]
