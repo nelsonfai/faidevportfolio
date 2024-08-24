@@ -33,7 +33,7 @@
         "alt": "Apjot homepage screenshot",
         "description": "Inspired by my love for writing, Apjot (A public journal of thoughts) is a blog website with a fully integrated content management system for both Blog posts and Podcast episodes. It will serve as a home for my write-ups and in the future, a place for others to do the same. Blog Posts are added dynamically from the Django database while Podcast episodes are embedded dynamically from Spotify. Both sections come with like and comment functionalities.",
         "technologies": "React, CSS, Appwrite API, Cloudinary (static file storage)",
-        "liveUrl": "https://my-apjot-production.up.railway.app",
+        "liveUrl": "https://apjot.blog",
         "githubUrl": "https://github.com/nelsonfai/django_apjot"
     },
     {

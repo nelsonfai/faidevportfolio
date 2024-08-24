@@ -1,0 +1,48 @@
+[
+    {
+        "title": "Mein agricDiary",
+        "image": "images/home_myagricdiary.png",
+        "alt": "meinagricdiary",
+        "description": "Dieses Projekt wurde aus dem Bedürfnis nach Effizienz und Entwicklung im Agrarsektor meines Heimatlandes Kamerun inspiriert. Mein agricDiary dient als soziales Netzwerk für alle, die im Agrarsektor tätig sind, und bietet den Nutzern die notwendigen Informationen (z. B. Wetterinformationen, landwirtschaftliche Nachrichten, Marktpreisaktualisierungen), um eine gute Ernte zu erzielen, sowie einen Marktplatz, um ihre Produkte zu bewerben und zu verkaufen.",
+        "technologies": "HTML, CSS, JavaScript, Django, Python",
+        "liveUrl": "https://farmtest-xqjg.onrender.com",
+        "githubUrl": "https://github.com/nelsonfai/farmsocial"
+    },
+    {
+        "title": "Habts Us",
+        "image": "images/habstus.png",
+        "alt": "Screenshot der Habts Us App",
+        "description": "Habts Us ist eine mobile App, die darauf ausgelegt ist, Wachstum, Verantwortlichkeit und Produktivität in Beziehungen zu fördern. Sie verfügt über einen Gewohnheitstracker, eine gemeinsame To-Do-Liste und gemeinsame Notizen, die es Paaren ermöglichen, gesündere Gewohnheiten aufzubauen, effizient zusammenzuarbeiten und ihre emotionalen Bindungen zu stärken. Die App ist noch in Entwicklung, aber eine Vorschau ist über den untenstehenden Link verfügbar.",
+        "technologies": "React Native, Django Rest Framework, Glassify SDK",
+        "liveUrl": "https://habts.us",
+        "githubUrl": null,
+        "screenshot": "https://app.milanote.com/1RH9Ky191bEn7Z?p=s6T3b2fZp6Q"
+    },
+    {
+        "title": "Fai Dev Studios (mein Freelancer-Entwicklerportfolio)",
+        "image": "images/faidevstudios-home.png",
+        "alt": "Fai Dev Studios Startseite",
+        "description": "Fai Dev Studios dient als Portfolio-Website für meine freiberufliche Entwicklungsarbeit. Sie enthält alle meine abgeschlossenen Kundenprojekte sowie UI- und UX-Designs.",
+        "technologies": "HTML, CSS, JavaScript",
+        "liveUrl": "https://6469da674c260d44c5ba49a1--funny-churros-3d9794.netlify.app",
+        "githubUrl": null
+    },
+    {
+        "title": "Apjot",
+        "image": "images/apjot-home.png",
+        "alt": "Apjot Startseite Screenshot",
+        "description": "Inspiriert von meiner Liebe zum Schreiben ist Apjot (Ein öffentliches Tagebuch der Gedanken) eine Blog-Website mit einem vollständig integrierten Content-Management-System für Blogbeiträge und Podcast-Episoden. Sie wird als Heimat für meine Texte dienen und in Zukunft ein Ort für andere sein, um dasselbe zu tun. Blogbeiträge werden dynamisch aus der Django-Datenbank hinzugefügt, während Podcast-Episoden dynamisch von Spotify eingebettet werden. Beide Bereiche bieten Like- und Kommentar-Funktionen.",
+        "technologies": "React, CSS, Appwrite API, Cloudinary (statische Dateispeicherung)",
+        "liveUrl": "https://apjot.blog",
+        "githubUrl": "https://github.com/nelsonfai/django_apjot"
+    },
+    {
+        "title": "OneClick-Med",
+        "image": "images/oneclickmed.png",
+        "alt": "OneClick-Med Startseite Screenshot",
+        "description": "OneClick-Med ist eine führende digitale Gesundheitsplattform in Afrika, die darauf abzielt, Warteschlangen, Mehrfachregistrierungen und inkonsistente medizinische Aufzeichnungen zu beseitigen. Die Plattform zentralisiert das Patientendatenmanagement und verbessert die Interkonnektivität im gesamten Gesundheitsökosystem für eine optimale Patientenversorgung.",
+        "technologies": "Next Js, Firebase, Tailwind CSS",
+        "liveUrl": "https://www.oneclickmed.ng",
+        "githubUrl": null
+    }
+]
