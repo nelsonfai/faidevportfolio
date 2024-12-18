@@ -1,4 +1,14 @@
-[
+[    
+    {
+    "title": "Habts Us",
+    "image": "images/habstus.png",
+    "alt": "Screenshot der Habts Us App",
+    "description": "Habts Us ist eine mobile App, die darauf ausgelegt ist, Wachstum, Verantwortlichkeit und Produktivität in Beziehungen zu fördern. Sie verfügt über einen Gewohnheitstracker, eine gemeinsame To-Do-Liste und gemeinsame Notizen, die es Paaren ermöglichen, gesündere Gewohnheiten aufzubauen, effizient zusammenzuarbeiten und ihre emotionalen Bindungen zu stärken. Die App ist noch in Entwicklung, aber eine Vorschau ist über den untenstehenden Link verfügbar.",
+    "technologies": "React Native, Django Rest Framework, Glassify SDK",
+    "liveUrl": "https://habts.us",
+    "githubUrl": null,
+    "screenshot": "https://onelink.to/hhhpps"
+},
     {
         "title": "Mein agricDiary",
         "image": "images/home_myagricdiary.png",
@@ -8,16 +18,7 @@
         "liveUrl": "https://farmtest-xqjg.onrender.com",
         "githubUrl": "https://github.com/nelsonfai/farmsocial"
     },
-    {
-        "title": "Habts Us",
-        "image": "images/habstus.png",
-        "alt": "Screenshot der Habts Us App",
-        "description": "Habts Us ist eine mobile App, die darauf ausgelegt ist, Wachstum, Verantwortlichkeit und Produktivität in Beziehungen zu fördern. Sie verfügt über einen Gewohnheitstracker, eine gemeinsame To-Do-Liste und gemeinsame Notizen, die es Paaren ermöglichen, gesündere Gewohnheiten aufzubauen, effizient zusammenzuarbeiten und ihre emotionalen Bindungen zu stärken. Die App ist noch in Entwicklung, aber eine Vorschau ist über den untenstehenden Link verfügbar.",
-        "technologies": "React Native, Django Rest Framework, Glassify SDK",
-        "liveUrl": "https://habts.us",
-        "githubUrl": null,
-        "screenshot": "https://app.milanote.com/1RH9Ky191bEn7Z?p=s6T3b2fZp6Q"
-    },
+
     {
         "title": "Fai Dev Studios (mein Freelancer-Entwicklerportfolio)",
         "image": "images/faidevstudios-home.png",
