@@ -10,15 +10,7 @@
         "githubUrl": null,
         "screenshot": "https://onelink.to/hhhpps"
     },
-    {
-        "title": "My agricDiary",
-        "image": "images/home_myagricdiary.png",
-        "alt": "myagricdiary",
-        "description": "This project was inspired by a need for efficiency and development in the Agricultural sector in my home country Cameroon. My agricDiary serves as a social networking site for all involved in the agricultural sector, providing users with the necessary information [for example weather information, agricultural news, Market price updates to enable a good harvest and a Marketplace to advertise and sell their products.",
-        "technologies": "HTML, CSS, JavaScript, Django, Python",
-        "liveUrl": "https://farmtest-xqjg.onrender.com",
-        "githubUrl": "https://github.com/nelsonfai/farmsocial"
-    },
+
     {
         "title": "MyTubeNotes: Your Study Companion for YouTube Learning",
         "image": "images/mytubenotes-home.png",
@@ -27,6 +19,15 @@
         "technologies": "Next.js, Firebase",
         "liveUrl": "https://mytubenotes.com",
         "githubUrl": null
+    },
+    {
+        "title": "My agricDiary",
+        "image": "images/home_myagricdiary.png",
+        "alt": "myagricdiary",
+        "description": "This project was inspired by a need for efficiency and development in the Agricultural sector in my home country Cameroon. My agricDiary serves as a social networking site for all involved in the agricultural sector, providing users with the necessary information [for example weather information, agricultural news, Market price updates to enable a good harvest and a Marketplace to advertise and sell their products.",
+        "technologies": "HTML, CSS, JavaScript, Django, Python",
+        "liveUrl": "https://farmtest-xqjg.onrender.com",
+        "githubUrl": "https://github.com/nelsonfai/farmsocial"
     },
     
     {

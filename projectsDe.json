@@ -9,8 +9,18 @@
     "githubUrl": null,
     "screenshot": "https://onelink.to/hhhpps"
 },
+
+{
+    "title": "MyTubeNotes: Dein Lernbegleiter für YouTube",
+    "image": "images/mytubenotes-home.png",
+    "alt": "MyTubeNotes-Startseite",
+    "description": "MyTubeNotes ist dein ultimates Tool für effektives Lernen mit YouTube. Erstelle Zeitstempel-Notizen, extrahiere Text und Code, speichere Screenshots und exportiere alles in deine bevorzugten Notizen-Apps. Nutze es einfach auf Desktop und Mobilgeräten.",
+    "technologies": "Next.js, Firebase",
+    "liveUrl": "https://mytubenotes.com",
+    "githubUrl": null
+},
     {
-        "title": "Mein agricDiary",
+        "title": "My agricDiary",
         "image": "images/home_myagricdiary.png",
         "alt": "meinagricdiary",
         "description": "Dieses Projekt wurde aus dem Bedürfnis nach Effizienz und Entwicklung im Agrarsektor meines Heimatlandes Kamerun inspiriert. Mein agricDiary dient als soziales Netzwerk für alle, die im Agrarsektor tätig sind, und bietet den Nutzern die notwendigen Informationen (z. B. Wetterinformationen, landwirtschaftliche Nachrichten, Marktpreisaktualisierungen), um eine gute Ernte zu erzielen, sowie einen Marktplatz, um ihre Produkte zu bewerben und zu verkaufen.",
@@ -19,16 +29,7 @@
         "githubUrl": "https://github.com/nelsonfai/farmsocial"
     },
 
-    {
-        "title": "MyTubeNotes: Dein Lernbegleiter für YouTube",
-        "image": "images/mytubenotes-home.png",
-        "alt": "MyTubeNotes-Startseite",
-        "description": "MyTubeNotes ist dein ultimates Tool für effektives Lernen mit YouTube. Erstelle Zeitstempel-Notizen, extrahiere Text und Code, speichere Screenshots und exportiere alles in deine bevorzugten Notizen-Apps. Nutze es einfach auf Desktop und Mobilgeräten.",
-        "technologies": "Next.js, Firebase",
-        "liveUrl": "https://mytubenotes.com",
-        "githubUrl": null
-    }
-    ,
+    
     {
         "title": "Apjot",
         "image": "images/apjot-home.png",
