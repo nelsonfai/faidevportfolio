@@ -20,14 +20,15 @@
         "githubUrl": "https://github.com/nelsonfai/farmsocial"
     },
     {
-        "title": "Fai Dev Studios (my Freelance Developer Portfolio)",
-        "image": "images/faidevstudios-home.png",
-        "alt": "Fai Dev Studios homepage",
-        "description": "Fai Dev studios serves as a portfolio website for my Freelance development work. It contains all my completed client projects, UI and UX Designs.",
-        "technologies": "HTML, CSS, JavaScript",
-        "liveUrl": "https://faidevstudios.com",
+        "title": "MyTubeNotes: Your Study Companion for YouTube Learning",
+        "image": "images/mytubenotes-home.png",
+        "alt": "MyTubeNotes homepage",
+        "description": "MyTubeNotes is your ultimate tool for enhancing YouTube-based learning. Take timestamped notes, extract text and code, capture screenshots, and seamlessly export them to your favorite note-taking apps. Stay productive on both desktop and mobile.",
+        "technologies": "Next.js, Firebase",
+        "liveUrl": "https://mytubenotes.com",
         "githubUrl": null
     },
+    
     {
         "title": "Apjot",
         "image": "images/apjot-home.png",

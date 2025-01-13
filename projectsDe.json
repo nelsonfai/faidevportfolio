@@ -20,14 +20,15 @@
     },
 
     {
-        "title": "Fai Dev Studios (mein Freelancer-Entwicklerportfolio)",
-        "image": "images/faidevstudios-home.png",
-        "alt": "Fai Dev Studios Startseite",
-        "description": "Fai Dev Studios dient als Portfolio-Website für meine freiberufliche Entwicklungsarbeit. Sie enthält alle meine abgeschlossenen Kundenprojekte sowie UI- und UX-Designs.",
-        "technologies": "HTML, CSS, JavaScript",
-        "liveUrl": "https://funny-churros-3d9794.netlify.app/",
+        "title": "MyTubeNotes: Dein Lernbegleiter für YouTube",
+        "image": "images/mytubenotes-home.png",
+        "alt": "MyTubeNotes-Startseite",
+        "description": "MyTubeNotes ist dein ultimates Tool für effektives Lernen mit YouTube. Erstelle Zeitstempel-Notizen, extrahiere Text und Code, speichere Screenshots und exportiere alles in deine bevorzugten Notizen-Apps. Nutze es einfach auf Desktop und Mobilgeräten.",
+        "technologies": "Next.js, Firebase",
+        "liveUrl": "https://mytubenotes.com",
         "githubUrl": null
-    },
+    }
+    ,
     {
         "title": "Apjot",
         "image": "images/apjot-home.png",
