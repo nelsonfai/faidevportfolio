@@ -30,6 +30,12 @@
         "category": "Backend"
     },
     {
+        "name": "Firebase",
+        "icon": "images/skill-icons/firebase-svgrepo-com.svg",
+        "alt": "iconfirebase",
+        "category": "Backend"
+    },
+    {
         "name": "React Native",
         "icon": "images/skill-icons/react-svgrepo-com.svg",
         "alt": "external-react-social-media-tanah-basah-basic-outline-tanah-basah",

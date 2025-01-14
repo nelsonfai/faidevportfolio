@@ -55,6 +55,7 @@ input, select, textarea {
 
 a{
     cursor: pointer;
+    color:gray
 }
 :root{
     --primary-color:#1d1d1d;
@@ -258,15 +259,19 @@ color:var(--secondary-color);
 .project-overview{
     align-items: center;
     height:110vh;
-    width:40%;
-    padding: 5%;
+    width:45%;
+    padding: 5% 2rem;
   
 }
 .project-overview li {
     margin-left: 20px;
     
 }
-
+.contactitem{
+    display: flex;
+    align-items: center;
+    gap:5px
+}
 
 section.contact{
     height:100vh;

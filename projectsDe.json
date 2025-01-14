@@ -19,6 +19,15 @@
     "liveUrl": "https://mytubenotes.com",
     "githubUrl": null
 },
+{
+    "title": "OneClick-Med",
+    "image": "images/oneclickmed.png",
+    "alt": "OneClick-Med Startseite Screenshot",
+    "description": "OneClick-Med ist eine führende digitale Gesundheitsplattform in Afrika, die darauf abzielt, Warteschlangen, Mehrfachregistrierungen und inkonsistente medizinische Aufzeichnungen zu beseitigen. Die Plattform zentralisiert das Patientendatenmanagement und verbessert die Interkonnektivität im gesamten Gesundheitsökosystem für eine optimale Patientenversorgung.",
+    "technologies": "Next Js, Firebase, Tailwind CSS",
+    "liveUrl": "https://www.oneclickmed.ng",
+    "githubUrl": null
+},
     {
         "title": "My agricDiary",
         "image": "images/home_myagricdiary.png",
@@ -38,14 +47,6 @@
         "technologies": "React, CSS, Appwrite API, Cloudinary (statische Dateispeicherung)",
         "liveUrl": "https://apjot.blog",
         "githubUrl": "https://github.com/nelsonfai/django_apjot"
-    },
-    {
-        "title": "OneClick-Med",
-        "image": "images/oneclickmed.png",
-        "alt": "OneClick-Med Startseite Screenshot",
-        "description": "OneClick-Med ist eine führende digitale Gesundheitsplattform in Afrika, die darauf abzielt, Warteschlangen, Mehrfachregistrierungen und inkonsistente medizinische Aufzeichnungen zu beseitigen. Die Plattform zentralisiert das Patientendatenmanagement und verbessert die Interkonnektivität im gesamten Gesundheitsökosystem für eine optimale Patientenversorgung.",
-        "technologies": "Next Js, Firebase, Tailwind CSS",
-        "liveUrl": "https://www.oneclickmed.ng",
-        "githubUrl": null
     }
+
 ]

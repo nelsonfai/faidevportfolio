@@ -21,6 +21,16 @@
         "githubUrl": null
     },
     {
+        "title": "OneClick-Med",
+        "image": "images/oneclickmed.png",
+        "alt": "OneClick-Med homepage screenshot",
+        "description": "OneClick-Med is a top-rated digital health platform in Africa aimed at eliminating queues, multiple registrations, and inconsistent medical records. The platform centralizes patient data management, enhancing inter-connectivity across the healthcare ecosystem for superior patient care.",
+        "technologies": "Next Js,Firebase,tailwind css ",
+        "liveUrl": "https://www.oneclickmed.ng",
+        "githubUrl": null
+    },
+
+    {
         "title": "My agricDiary",
         "image": "images/home_myagricdiary.png",
         "alt": "myagricdiary",
@@ -38,14 +48,6 @@
         "technologies": "React, CSS, Appwrite API, Cloudinary (static file storage)",
         "liveUrl": "https://apjot.blog",
         "githubUrl": "https://github.com/nelsonfai/django_apjot"
-    },
-    {
-        "title": "OneClick-Med",
-        "image": "images/oneclickmed.png",
-        "alt": "OneClick-Med homepage screenshot",
-        "description": "OneClick-Med is a top-rated digital health platform in Africa aimed at eliminating queues, multiple registrations, and inconsistent medical records. The platform centralizes patient data management, enhancing inter-connectivity across the healthcare ecosystem for superior patient care.",
-        "technologies": "Next Js,Firebase,tailwind css ",
-        "liveUrl": "https://www.oneclickmed.ng",
-        "githubUrl": null
     }
+
 ]
