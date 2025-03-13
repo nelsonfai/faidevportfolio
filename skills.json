@@ -54,6 +54,12 @@
         "category": "Frontend"
     },
     {
+        "name": "Angular",
+        "icon": "images/skill-icons/angular.svg",
+        "alt": "angularicon",
+        "category": "Frontend"
+    },
+    {
         "name": "Tailwind CSS",
         "icon": "images/skill-icons/tailwindcss-svgrepo-com.svg",
         "alt": "icontailwindcss",
