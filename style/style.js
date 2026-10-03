@@ -13,28 +13,39 @@ const onMouseMove = (e) =>{
   }
   document.addEventListener('mousemove', onMouseMove);
 
-icon.onclick=function(){
+function toggleTheme(){
   document.body.classList.toggle('dark-theme')
   if(document.body.classList.contains('dark-theme')) {
-    icon.src='images/sun.png'
-    
-  } 
-  else{
-    icon.src='images/moon.png'
+    icon.setAttribute('data-lucide', 'sun')
+    document.getElementById('darklight').setAttribute('aria-label', 'Switch to light mode')
   }
+  else{
+    icon.setAttribute('data-lucide', 'moon')
+    document.getElementById('darklight').setAttribute('aria-label', 'Switch to dark mode')
+  }
+  lucide.createIcons({ attrs: { 'stroke-width': 1.8 } })
+  icon = document.getElementById('icon')
+  icon.onclick = toggleTheme
 }
+icon.onclick = toggleTheme
 
-ham.onclick=function(){
+function toggleMenu(){
   document.body.classList.toggle('ham')
   if(document.body.classList.contains('ham')) {
-    ham.src='images/x.png'
+    ham.setAttribute('data-lucide', 'x')
+    document.querySelector('.menu').setAttribute('aria-label', 'Close navigation')
     navlinks.style.display='block'
-  } 
+  }
   else{
-    ham.src='images/hammenu.png'
+    ham.setAttribute('data-lucide', 'menu')
+    document.querySelector('.menu').setAttribute('aria-label', 'Open navigation')
     navlinks.style.display='none'
   }
+  lucide.createIcons({ attrs: { 'stroke-width': 1.8 } })
+  ham = document.getElementById('ham')
+  ham.onclick = toggleMenu
 }
+ham.onclick = toggleMenu
 
 function splitScroll(){
   console.log('splitscroll')

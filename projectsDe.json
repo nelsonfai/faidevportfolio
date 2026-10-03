@@ -45,7 +45,7 @@
         "alt": "Apjot Startseite Screenshot",
         "description": "Inspiriert von meiner Liebe zum Schreiben ist Apjot (Ein öffentliches Tagebuch der Gedanken) eine Blog-Website mit einem vollständig integrierten Content-Management-System für Blogbeiträge und Podcast-Episoden. Sie wird als Heimat für meine Texte dienen und in Zukunft ein Ort für andere sein, um dasselbe zu tun. Blogbeiträge werden dynamisch aus der Django-Datenbank hinzugefügt, während Podcast-Episoden dynamisch von Spotify eingebettet werden. Beide Bereiche bieten Like- und Kommentar-Funktionen.",
         "technologies": "React, CSS, Appwrite API, Cloudinary (statische Dateispeicherung)",
-        "liveUrl": "https://apjot.blog",
+        "liveUrl": "https://apjot.site",
         "githubUrl": "https://github.com/nelsonfai/django_apjot"
     }
 
