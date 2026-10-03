@@ -277,10 +277,11 @@ td svg {
     position:absolute;
     height:100%;
     width:100%;
-    background-color:var(--secondary-color);
-    border-left:1px solid var(--primary-color);
+    background-color:transparent;
+    border-left:0;
     left:0;
     top:0;
+    opacity:0;
     animation:typing 5s steps(var(--typing-steps)) infinite;
 }
 .hero-title span:hover{
@@ -388,7 +389,7 @@ header{
 }
 
 .project img{
-    border: 1px solid black;
+    border: 1px solid var(--primary-color);
     margin-block: 10px;
     display:block;
     width:100%;
@@ -415,7 +416,7 @@ header{
     position:sticky;
     top:0;
     align-self:flex-start;
-    background-color: white;
+    background-color: var(--secondary-color);
   
 }
 .project-overview li {
