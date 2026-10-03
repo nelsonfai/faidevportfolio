@@ -60,7 +60,7 @@ const copy = {
     language: 'en',
     otherLanguage: 'DE',
     otherHref: '/de',
-    nav: ['About', 'Projects', 'Contact'],
+    nav: ['About', 'Projects', 'Blog'],
     hello: 'hello',
     intro: 'I am Fai',
     role: 'Full-Stack Engineer',
@@ -96,7 +96,7 @@ const copy = {
     language: 'de',
     otherLanguage: 'EN',
     otherHref: '/',
-    nav: ['Über mich', 'Projekte', 'Kontakt'],
+    nav: ['Über mich', 'Projekte', 'Blog'],
     hello: 'hallo',
     intro: 'Ich bin Fai',
     role: 'Full-Stack-Engineer',
@@ -194,6 +194,7 @@ export default function Portfolio({ language = 'en' }) {
           <Link href={t.otherHref}>{t.otherLanguage}</Link>
           <a href="#about">{t.nav[0]}</a>
           <a href="#project">{t.nav[1]}</a>
+          <Link href="/blog">{t.nav[2]}</Link>
         </div>
         <IconButton label={dark ? 'Switch to light mode' : 'Switch to dark mode'} onClick={() => setDark(!dark)} className="theme-button">
           {dark ? <FiSun id="icon" /> : <FiMoon id="icon" />}

@@ -1181,6 +1181,167 @@ section.testimonials{
     margin:auto;
 }
 
+.blog-page,
+.blog-article-page{
+    min-height:100vh;
+    padding-bottom:6rem;
+}
+.blog-nav{
+    margin-bottom:5rem;
+}
+.blog-back,
+.case-study-back{
+    font-size:.85rem;
+    text-decoration:underline;
+    text-underline-offset:.3rem;
+}
+.blog-header,
+.blog-grid,
+.blog-article{
+    width:min(100% - 3rem, 1180px);
+    margin-inline:auto;
+}
+.blog-header{
+    width:90%;
+    max-width:none;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:5rem;
+}
+.blog-header h1{
+    margin:0;
+    font-size:clamp(3rem, 8vw, 8rem);
+    line-height:.85;
+    letter-spacing:-.09em;
+}
+.blog-header > p:last-child{
+    max-width:620px;
+    margin-top:2rem;
+    font-size:1.1rem;
+}
+.blog-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:4rem 2rem;
+}
+.blog-card{
+    border-top:1px solid var(--primary-color);
+    padding-top:1rem;
+}
+.blog-card-image-wrap{
+    display:block;
+    aspect-ratio:16 / 9;
+    overflow:hidden;
+    background:color-mix(in srgb, var(--primary-color) 5%, var(--secondary-color));
+}
+.blog-card-image,
+.blog-card-placeholder{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:center;
+}
+.blog-card-image{
+    transition:transform .45s ease;
+}
+.blog-card:hover .blog-card-image{
+    transform:scale(1.03);
+}
+.blog-card-content{
+    padding-top:1.25rem;
+}
+.blog-card-type{
+    margin-bottom:.75rem;
+    font-size:.7rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:color-mix(in srgb, var(--primary-color) 58%, transparent);
+}
+.blog-card h2{
+    margin:0;
+    font-size:clamp(1.35rem, 2.4vw, 2.25rem);
+    line-height:1;
+    letter-spacing:-.05em;
+}
+.blog-card-content > p:not(.blog-card-type){
+    margin-top:1rem;
+}
+.blog-card-meta,
+.blog-article-meta{
+    display:flex;
+    gap:1.5rem;
+    margin-top:1.25rem;
+    font-size:.75rem;
+    color:color-mix(in srgb, var(--primary-color) 60%, transparent);
+}
+.blog-article{
+    max-width:980px;
+}
+.blog-article-header{
+    max-width:850px;
+    margin-bottom:4rem;
+}
+.blog-article-header h1{
+    max-width:850px;
+    margin:0;
+    font-size:clamp(2.2rem, 5vw, 5rem);
+    line-height:.95;
+    letter-spacing:-.08em;
+}
+.blog-article-intro{
+    max-width:700px;
+    margin-top:2rem;
+    font-size:1.15rem;
+}
+.blog-article-image{
+    display:block;
+    width:100%;
+    aspect-ratio:16 / 9;
+    object-fit:contain;
+    object-position:center;
+    margin-bottom:5rem;
+    border:1px solid var(--primary-color);
+}
+.blog-article-sections{
+    border-top:1px solid var(--primary-color);
+}
+.blog-article-sections section{
+    display:grid;
+    grid-template-columns:70px minmax(180px, 260px) 1fr;
+    gap:1.5rem;
+    padding:2.5rem 0;
+    border-bottom:1px solid color-mix(in srgb, var(--primary-color) 28%, transparent);
+}
+.blog-article-sections h2{
+    margin:0;
+    font-size:1rem;
+    letter-spacing:.08em;
+}
+.blog-article-sections section > p:not(.case-study-number){
+    margin:0;
+    white-space:pre-line;
+}
+.blog-article-body{
+    max-width:760px;
+    margin-inline:auto;
+    font-size:1.05rem;
+}
+.blog-article-body p + p{
+    margin-top:1.5rem;
+}
+.blog-article-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+    margin-top:3rem;
+}
+.blog-article-tags span{
+    padding:.3rem .65rem;
+    border:1px solid color-mix(in srgb, var(--primary-color) 35%, transparent);
+    font-size:.75rem;
+}
+
 @media screen and (max-width:860px){
     .case-study-nav{
         margin-bottom:2rem;
@@ -1203,6 +1364,24 @@ section.testimonials{
     }
     .mermaid-diagram{
         margin-top:1.5rem;
+    }
+    .blog-nav{
+        margin-bottom:3rem;
+    }
+    .blog-header,
+    .blog-grid,
+    .blog-article{
+        width:min(100% - 2rem, 980px);
+    }
+    .blog-grid{
+        grid-template-columns:1fr;
+        gap:3rem;
+    }
+    .blog-article-sections section{
+        display:block;
+    }
+    .blog-article-sections h2{
+        margin-bottom:1rem;
     }
 }
 
