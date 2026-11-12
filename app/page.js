@@ -1,5 +1,10 @@
-import Portfolio from './portfolio';
+import HomePage from './home-page';
 
-export default function HomePage() {
-  return <Portfolio language="en" />;
+export const metadata = {
+  title: 'Nelson Fai',
+  description: 'Full-stack engineer who also writes. Selected works, writing and experiments.',
+};
+
+export default function Page() {
+  return <HomePage language="en" />;
 }

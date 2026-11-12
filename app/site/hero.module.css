@@ -1,0 +1,150 @@
+/* Flat-lay hero. Positions are percentages of .box, which keeps the
+   prototype's 2000x1436 proportions on landscape screens and switches to a
+   separately composed portrait arrangement on phones. Everything inside
+   scales with the box (cqw units), so nothing needs per-pixel breakpoints. */
+
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.box {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: min(100vw, 100svh * 1.3928);
+  aspect-ratio: 2000 / 1436;
+  container-type: inline-size;
+}
+
+/* ---------- objects ---------- */
+
+.item {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  rotate: var(--r, 0deg);
+  pointer-events: auto;
+}
+.itemIn { transition: translate 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), rotate 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.itemIn img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
+/* No shadows, by request: objects sit flat on the white sheet. */
+@media (hover: hover) and (pointer: fine) {
+  .item:hover .itemIn { translate: 0 -0.5cqw; rotate: -1.5deg; }
+  .item:nth-child(even):hover .itemIn { rotate: 1.5deg; }
+}
+
+/* Placement of the prototype cutouts (already at their final angle). */
+/* White earphones on a white page: a hairline edge keeps them readable (not a cast shadow). */
+.i-earphones img { filter: drop-shadow(0 0 0.6px rgba(27, 26, 24, 0.55)); }
+.i-cap { --x: 8.5%; --y: 17.4%; --w: 17%; }
+.i-notebook { --x: 27.5%; --y: 18.2%; --w: 22.5%; }
+.i-ring { --x: 52.4%; --y: 31.2%; --w: 4.7%; }
+.i-ring-2 { --x: 56.2%; --y: 33.4%; --w: 4.5%; --r: 38deg; }
+.i-earphones { --x: 74%; --y: 18.05%; --w: 25%; --r: 90deg; }
+.i-glasses { --x: 26.5%; --y: 60.3%; --w: 22.75%; }
+.i-blue-pen { --x: 61.75%; --y: 58.5%; --w: 10.75%; }
+.i-black-pen { --x: 67.25%; --y: 56.8%; --w: 10.25%; }
+
+/* ---------- signature ---------- */
+
+.sign { position: absolute; left: 27%; top: 45.4%; width: 44%; color: #1b1a18; }
+.sign svg { display: block; width: 100%; height: auto; overflow: visible; }
+.signIntro { position: absolute; left: 14%; top: 50%; width: 72% !important; translate: 0 -50%; }
+
+/* ---------- notes and doodles ---------- */
+
+.notes { position: absolute; inset: 0; color: var(--pen); }
+.note {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  rotate: var(--r, -4deg);
+  font-family: var(--handf);
+  font-size: 2.15cqw;
+  line-height: 1.02;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.note > span { display: block; }
+.noteUnderline { display: block; width: 62%; height: 0.75cqw; margin: 0.35cqw 0 0 auto; overflow: visible; }
+.note path, .doodle path { stroke-width: 2.2; }
+
+.doodle { position: absolute; left: var(--x); top: var(--y); width: var(--w); height: auto; overflow: visible; }
+
+.nCap { --x: 8.5%; --y: 10.5%; --r: -5deg; }
+.aCap { --x: 29.5%; --y: 14.6%; --w: 2.9%; transform: scaleX(-1) rotate(18deg); }
+.sparksCap { --x: 4.6%; --y: 15.2%; --w: 3.1%; transform: rotate(-70deg); }
+
+.nWord { --x: 46.5%; --y: 9.2%; --r: -5deg; }
+.aWord { --x: 42.3%; --y: 14%; --w: 2.9%; transform: scaleX(-1) rotate(20deg); }
+
+.nRing { --x: 50.8%; --y: 18.2%; --r: -6deg; padding: 0.7cqw 1.4cqw; }
+.ringLoop { position: absolute; inset: -8% -4%; width: 108%; height: 116%; overflow: visible; }
+.aRing { --x: 54.5%; --y: 26.7%; --w: 1.7%; transform: rotate(6deg); }
+.sparksRing { --x: 49.8%; --y: 32%; --w: 1.8%; transform: rotate(-95deg); }
+
+.nMusic { --x: 77%; --y: 9.2%; --r: -8deg; }
+.aMusic { --x: 72%; --y: 16%; --w: 4.4%; transform: scaleX(-1) rotate(-4deg); }
+.flower { --x: 94.2%; --y: 48%; --w: 4.8%; }
+
+.nSee { --x: 8.5%; --y: 67.4%; --r: -4deg; }
+.aSee { --x: 22.3%; --y: 72.2%; --w: 3.5%; transform: rotate(-58deg); }
+
+.nPens { --x: 85.2%; --y: 61.4%; --r: -7deg; line-height: 1.5; }
+.aPens { --x: 78.8%; --y: 66.5%; --w: 4.8%; transform: scaleX(-1) rotate(-52deg); }
+
+.nPlace { --x: 28.6%; --y: 83%; --r: -2deg; display: flex; align-items: center; gap: 1cqw; }
+.pin { width: 1.5cqw; height: auto; overflow: visible; flex: none; }
+.pin path { stroke-width: 2; }
+
+.starA { --x: 61%; --y: 42.5%; --w: 2.1%; }
+.starB { --x: 8%; --y: 56%; --w: 2.1%; transform: rotate(20deg); }
+.cherries { --x: 52.2%; --y: 73.6%; --w: 5%; }
+.hatch { --x: 76.5%; --y: 78.2%; --w: 1.9%; }
+
+/* ---------- phones and portrait tablets: recomposed, not shrunk ----------
+   Smaller objects with more air between them, and only the notes that fit. */
+
+@media (max-width: 760px), (orientation: portrait) and (max-width: 1100px) {
+  .box { width: min(100vw, 100svh * 0.54); height: 100svh; aspect-ratio: auto; }
+
+  .i-cap { --x: 10%; --y: 12.5%; --w: 29%; --r: -4deg; }
+  .i-notebook { --x: 53%; --y: 15.5%; --w: 37%; }
+  .i-ring { --x: 46.5%; --y: 34.2%; --w: 7%; }
+  .i-ring-2 { --x: 53.5%; --y: 35.6%; --w: 6.6%; }
+  .i-earphones { --x: 62.5%; --y: 30.5%; --w: 34%; --r: 90deg; }
+  .i-glasses { --x: 8%; --y: 62.5%; --w: 43%; }
+  .i-blue-pen { --x: 65%; --y: 60.5%; --w: 13.5%; }
+  .i-black-pen { --x: 74.5%; --y: 59.5%; --w: 13%; }
+
+  .sign { left: 6%; top: 48.5%; width: 88%; }
+  .sign path { stroke-width: 6.5; }
+  .signIntro { left: 6%; width: 88% !important; }
+  .signIntro path { stroke-width: 3.8; }
+
+  .note { font-size: 4.6cqw; }
+  .noteUnderline { height: 1.8cqw; margin-top: 0.8cqw; }
+  .note path, .doodle path { stroke-width: 1.9; }
+
+  .nCap { --x: calc(8% - 20px); --y: 35.5%; --r: -5deg; width: max-content; }
+  .nCap .noteUnderline { width: 45%; margin-left: auto; margin-right: auto; transform: translateX(-30px); }
+  .sparksCap { --x: 5%; --y: 10.5%; --w: 6%; }
+  .nWord { --x: 65%; --y: 6.5%; --r: -5deg; }
+  .aWord { --x: 60%; --y: 16.5%; --w: 5%; }
+  .nSee { --x: 9%; --y: 75.5%; }
+  .nPlace { --x: 9%; --y: 84.5%; gap: 2.2cqw; }
+  .pin { width: 3.2cqw; }
+  .starA { --x: 47%; --y: 60%; --w: 4.5%; }
+
+  .aCap, .aSee, .nPens, .aPens, .starB,
+  .nRing, .aRing, .sparksRing, .nMusic, .aMusic, .flower, .cherries, .hatch { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer { position: relative; height: 100svh; }
+  .signIntro { display: none; }
+}

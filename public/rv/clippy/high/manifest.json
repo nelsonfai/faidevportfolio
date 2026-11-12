@@ -1,0 +1,752 @@
+{
+  "version": 1,
+  "preset": "high",
+  "width": 512,
+  "height": 512,
+  "animations": {
+    "neutral": {
+      "id": "neutral",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "loop",
+      "pages": [
+        {
+          "image": "neutral-0.png",
+          "atlas": "neutral-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "neutral-1.png",
+          "atlas": "neutral-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "neutral-2.png",
+          "atlas": "neutral-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "neutral-3.png",
+          "atlas": "neutral-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "neutral-4.png",
+          "atlas": "neutral-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "neutral-5.png",
+          "atlas": "neutral-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "neutral-6.png",
+          "atlas": "neutral-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    },
+    "waving": {
+      "id": "waving",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "once",
+      "pages": [
+        {
+          "image": "waving-0.png",
+          "atlas": "waving-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "waving-1.png",
+          "atlas": "waving-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "waving-2.png",
+          "atlas": "waving-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "waving-3.png",
+          "atlas": "waving-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "waving-4.png",
+          "atlas": "waving-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "waving-5.png",
+          "atlas": "waving-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "waving-6.png",
+          "atlas": "waving-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    },
+    "thinking": {
+      "id": "thinking",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "loop",
+      "pages": [
+        {
+          "image": "thinking-0.png",
+          "atlas": "thinking-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "thinking-1.png",
+          "atlas": "thinking-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "thinking-2.png",
+          "atlas": "thinking-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "thinking-3.png",
+          "atlas": "thinking-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "thinking-4.png",
+          "atlas": "thinking-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "thinking-5.png",
+          "atlas": "thinking-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "thinking-6.png",
+          "atlas": "thinking-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    },
+    "reading": {
+      "id": "reading",
+      "fps": 7,
+      "frameCount": 35,
+      "playback": "loop",
+      "pages": [
+        {
+          "image": "reading-0.png",
+          "atlas": "reading-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "reading-1.png",
+          "atlas": "reading-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "reading-2.png",
+          "atlas": "reading-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "reading-3.png",
+          "atlas": "reading-3.json",
+          "frameStart": 27,
+          "frameCount": 8,
+          "width": 1548,
+          "height": 1548
+        }
+      ]
+    },
+    "listening_music": {
+      "id": "listening_music",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "loop",
+      "pages": [
+        {
+          "image": "listening_music-0.png",
+          "atlas": "listening_music-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "listening_music-1.png",
+          "atlas": "listening_music-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "listening_music-2.png",
+          "atlas": "listening_music-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "listening_music-3.png",
+          "atlas": "listening_music-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "listening_music-4.png",
+          "atlas": "listening_music-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "listening_music-5.png",
+          "atlas": "listening_music-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "listening_music-6.png",
+          "atlas": "listening_music-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    },
+    "celebrating": {
+      "id": "celebrating",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "once",
+      "pages": [
+        {
+          "image": "celebrating-0.png",
+          "atlas": "celebrating-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "celebrating-1.png",
+          "atlas": "celebrating-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "celebrating-2.png",
+          "atlas": "celebrating-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "celebrating-3.png",
+          "atlas": "celebrating-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "celebrating-4.png",
+          "atlas": "celebrating-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "celebrating-5.png",
+          "atlas": "celebrating-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "celebrating-6.png",
+          "atlas": "celebrating-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    },
+    "sleeping": {
+      "id": "sleeping",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "loop",
+      "pages": [
+        {
+          "image": "sleeping-0.png",
+          "atlas": "sleeping-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleeping-1.png",
+          "atlas": "sleeping-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleeping-2.png",
+          "atlas": "sleeping-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleeping-3.png",
+          "atlas": "sleeping-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleeping-4.png",
+          "atlas": "sleeping-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleeping-5.png",
+          "atlas": "sleeping-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleeping-6.png",
+          "atlas": "sleeping-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    },
+    "sleepy": {
+      "id": "sleepy",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "loop",
+      "pages": [
+        {
+          "image": "sleepy-0.png",
+          "atlas": "sleepy-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleepy-1.png",
+          "atlas": "sleepy-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleepy-2.png",
+          "atlas": "sleepy-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleepy-3.png",
+          "atlas": "sleepy-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleepy-4.png",
+          "atlas": "sleepy-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleepy-5.png",
+          "atlas": "sleepy-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "sleepy-6.png",
+          "atlas": "sleepy-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    },
+    "excited": {
+      "id": "excited",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "loop",
+      "pages": [
+        {
+          "image": "excited-0.png",
+          "atlas": "excited-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "excited-1.png",
+          "atlas": "excited-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "excited-2.png",
+          "atlas": "excited-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "excited-3.png",
+          "atlas": "excited-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "excited-4.png",
+          "atlas": "excited-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "excited-5.png",
+          "atlas": "excited-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "excited-6.png",
+          "atlas": "excited-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    },
+    "surprised": {
+      "id": "surprised",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "once",
+      "pages": [
+        {
+          "image": "surprised-0.png",
+          "atlas": "surprised-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "surprised-1.png",
+          "atlas": "surprised-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "surprised-2.png",
+          "atlas": "surprised-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "surprised-3.png",
+          "atlas": "surprised-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "surprised-4.png",
+          "atlas": "surprised-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "surprised-5.png",
+          "atlas": "surprised-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "surprised-6.png",
+          "atlas": "surprised-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    },
+    "happy": {
+      "id": "happy",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "loop",
+      "pages": [
+        {
+          "image": "happy-0.png",
+          "atlas": "happy-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "happy-1.png",
+          "atlas": "happy-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "happy-2.png",
+          "atlas": "happy-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "happy-3.png",
+          "atlas": "happy-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "happy-4.png",
+          "atlas": "happy-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "happy-5.png",
+          "atlas": "happy-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "happy-6.png",
+          "atlas": "happy-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    },
+    "dizzy": {
+      "id": "dizzy",
+      "fps": 15,
+      "frameCount": 60,
+      "playback": "loop",
+      "pages": [
+        {
+          "image": "dizzy-0.png",
+          "atlas": "dizzy-0.json",
+          "frameStart": 0,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "dizzy-1.png",
+          "atlas": "dizzy-1.json",
+          "frameStart": 9,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "dizzy-2.png",
+          "atlas": "dizzy-2.json",
+          "frameStart": 18,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "dizzy-3.png",
+          "atlas": "dizzy-3.json",
+          "frameStart": 27,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "dizzy-4.png",
+          "atlas": "dizzy-4.json",
+          "frameStart": 36,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "dizzy-5.png",
+          "atlas": "dizzy-5.json",
+          "frameStart": 45,
+          "frameCount": 9,
+          "width": 1548,
+          "height": 1548
+        },
+        {
+          "image": "dizzy-6.png",
+          "atlas": "dizzy-6.json",
+          "frameStart": 54,
+          "frameCount": 6,
+          "width": 1548,
+          "height": 1032
+        }
+      ]
+    }
+  }
+}

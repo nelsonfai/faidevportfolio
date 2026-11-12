@@ -1,0 +1,23 @@
+/* Thin ink browser frame used by the works section. */
+.browser {
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.browserBar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 14px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.dots { display: flex; gap: 6px; }
+.dots i { width: 9px; height: 9px; border: 1.5px solid var(--ink); border-radius: 50%; }
+.url { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.browserBody { position: relative; }
+.browserBody img { display: block; width: 100%; height: auto; max-height: 52svh; object-fit: cover; object-position: top; }
+
+@media (max-width: 760px) {
+  .browserBar { padding: 7px 10px; }
+}

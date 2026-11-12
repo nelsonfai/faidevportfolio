@@ -1,0 +1,825 @@
+/* Portfolio layout, scoped to its root so page-specific styles stay contained. */
+
+.root {
+  --paper: #ffffff;
+  --sheet: #ffffff;
+  --ink: #1b1a18;
+  --muted: #6d685f;
+  --rule: #e2e0db;
+  --pen: #2536c4;
+  --gutter: clamp(20px, 4.5vw, 72px);
+  --display: var(--f-display), 'Cormorant Garamond', Georgia, serif;
+  --sans: var(--f-sans), 'Helvetica Neue', Arial, sans-serif;
+  --handf: var(--f-hand), 'Bradley Hand', 'Segoe Print', cursive;
+
+  position: relative;
+  min-height: 100svh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+.root a { color: inherit; text-decoration: none; }
+.root img { max-width: 100%; }
+
+.hand {
+  font-family: var(--handf);
+  color: var(--pen);
+  font-size: 1.55rem;
+  line-height: 1.05;
+  font-weight: 400;
+}
+
+/* ---------- hero -> about stage ---------- */
+
+.pin { height: 545svh; }
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .root[data-anim='pending'] .stage { visibility: hidden; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pin { height: auto; }
+  .stage { position: relative; height: auto; min-height: 100svh; }
+  .corner { display: none; }
+}
+
+.corner {
+  position: absolute;
+  bottom: 24px;
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.cornerLeft { left: var(--gutter); }
+.cornerRight { right: var(--gutter); text-align: right; }
+.corner { z-index: 4; }
+.scrollCue { position: absolute; left: 50%; bottom: 20px; z-index: 4; translate: -50% 0; }
+.scrollArrow { width: 16px; height: 30px; color: var(--pen); overflow: visible; }
+
+
+/* ---------- about ---------- */
+
+.about {
+  position: relative;
+  box-sizing: border-box;
+  background-color: #f7f5f0;
+  background-image: radial-gradient(rgba(27, 26, 24, 0.11) 0.8px, transparent 0.9px);
+  background-size: 18px 18px;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  align-content: center;
+  column-gap: 2.5vw;
+  row-gap: clamp(32px, 6vh, 72px);
+  padding: 12vh var(--gutter) clamp(44px, 8vh, 96px);
+  max-width: 1500px;
+  margin: 20px auto;
+}
+.aboutKicker {
+  position: absolute;
+  top: 17%;
+  left: var(--gutter);
+  width: max-content;
+  color: var(--pen);
+  font-size: clamp(1.25rem, 2.1vw, 2rem);
+  rotate: -5deg;
+}
+.aboutKicker::after {
+  content: '';
+  position: absolute;
+  left: 30%;
+  bottom: -0.3em;
+  width: 68%;
+  height: 0.2em;
+  border-bottom: 2px solid var(--pen);
+  border-radius: 50%;
+  rotate: -3deg;
+}
+.aboutArrow {
+  position: absolute;
+  left: clamp(180px, 22vw, 300px);
+  top: 28%;
+  width: clamp(100px, 11vw, 150px);
+  height: auto;
+  color: var(--pen);
+  rotate: 8deg;
+  overflow: visible;
+}
+.aboutHeadline {
+  grid-column: 1 / 7;
+  grid-row: 1;
+  align-self: center;
+  max-width: none;
+  margin: 5vh 0 0;
+  font-family: var(--display);
+  font-size: clamp(3.2rem, 6.1vw, 6.8rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+.aboutCircled { position: relative; display: inline-block; white-space: nowrap; z-index: 0; }
+.aboutCircleMark {
+  position: absolute;
+  inset: -9% -9%;
+  width: 118%;
+  height: 120%;
+  color: var(--pen);
+  overflow: visible;
+  pointer-events: none;
+  z-index: -1;
+}
+.aboutAside {
+  position: relative;
+  grid-column: 7 / 13;
+  grid-row: 1;
+  align-self: center;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid var(--rule);
+  padding: 0 clamp(28px, 4vw, 64px);
+  margin-top: 5vh;
+}
+.aboutBody {
+  max-width: 42ch;
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 2.15vw, 2.3rem);
+  line-height: 1.35;
+}
+.aboutBodyMark {
+  position: absolute;
+  right: 18%;
+  bottom: -1.8em;
+  width: clamp(110px, 12vw, 180px);
+  height: 0.5em;
+  color: var(--pen);
+  overflow: visible;
+}
+.aboutSummary {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  border-top: 1px solid var(--rule);
+  padding-top: clamp(18px, 2.6vh, 30px);
+}
+.aboutPoint {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 clamp(14px, 2vw, 30px);
+  border-left: 1px solid var(--rule);
+  font-family: var(--display);
+  font-size: clamp(1rem, 1.5vw, 1.6rem);
+  white-space: nowrap;
+}
+.aboutPoint:first-of-type { border-left: 0; }
+.aboutPointIcon {
+  width: clamp(25px, 2.5vw, 40px);
+  height: auto;
+  flex: none;
+  stroke: var(--pen);
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- section heads ---------- */
+
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 34px;
+  margin-bottom: clamp(70px, 14vh, 170px);
+}
+.sectionTitle {
+  position: relative;
+  width: fit-content;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 10vw, 9rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+.works .sectionTitle, .writing .sectionTitle { font-size: clamp(3.2rem, 6.1vw, 6.8rem); }
+.titleUnderline { position: absolute; left: 0; bottom: -0.2em; width: 100%; height: 0.16em; color: var(--pen); overflow: visible; }
+.titleUnderline path { stroke-width: 2.6; }
+.sectionNote { rotate: -4deg; padding-bottom: 0.5em; max-width: 15ch; }
+.worksNoteWrap { position: relative; }
+.worksArrow {
+  position: absolute;
+  left: 12%;
+  top: -48px;
+  width: 78px;
+  height: 58px;
+  color: var(--pen);
+  rotate: 12deg;
+  overflow: visible;
+}
+
+/* ---------- works ---------- */
+
+.works, .writing { padding: 0 var(--gutter); max-width: 1500px; margin: 0 auto; }
+.works { padding-top: 50px; }
+
+.project {
+  box-sizing: border-box;
+  position: sticky;
+  top: calc(72px + var(--stack-index, 0) * 12px);
+  z-index: calc(var(--stack-index, 0) + 1);
+  width: 100vw;
+  min-height: calc(100svh - 72px);
+  margin-left: calc(50% - 50vw);
+  margin-bottom: 24px;
+  padding: clamp(42px, 7vh, 88px) max(var(--gutter), calc((100vw - 1360px) / 2));
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 3vw;
+  align-items: center;
+  color: var(--project-ink);
+  background: var(--project-bg);
+  border-radius: 2rem 2rem 0 0;
+  --ink: var(--project-ink);
+  --muted: var(--project-muted);
+  --pen: var(--project-accent);
+  --rule: var(--project-rule);
+  --paper: var(--project-paper);
+  --sheet: transparent;
+}
+.media { position: relative; grid-row: 1; rotate: var(--rot, 0deg); perspective: 900px; }
+.info { grid-row: 1; }
+
+.wide .media { grid-column: 1 / 9; }
+.wide .info { grid-column: 9 / 13; }
+.offset .media { grid-column: 2 / 8; }
+.offset .info { grid-column: 9 / 13; align-self: end; padding-bottom: 8%; }
+.tall .media { grid-column: 2 / 6; }
+.tall .info { grid-column: 7 / 12; }
+.tall .frame img { max-height: 78svh; width: auto; margin: 0 auto; }
+.tall .frame { width: fit-content; margin: 0 auto; }
+.flip .media { grid-column: 5 / 13; }
+.flip .info { grid-column: 1 / 5; align-self: start; padding-top: 6%; }
+.clippy .media { grid-column: 1 / 7; }
+.clippy .info { grid-column: 8 / 13; }
+
+.frame {
+  position: relative;
+  padding: 0;
+  background: transparent;
+}
+.frame img { display: block; width: 100%; height: auto; }
+
+.mediaNote { display: flex; align-items: flex-start; gap: 6px; margin: 14px 0 0 7%; rotate: -2deg; width: fit-content; }
+.noteArrow { width: 34px; height: 26px; color: var(--pen); transform: scale(-1, -1); flex: none; overflow: visible; }
+.noteArrow path { stroke-width: 1.8; }
+.mediaNote .hand { padding-top: 12px; }
+
+.kind {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.index { font-family: var(--handf); font-size: 1.7rem; letter-spacing: 0; color: var(--pen); line-height: 1; }
+.projectTitle {
+  margin: 12px 0 18px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 4.6vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.projectText { max-width: 42ch; }
+.stack { margin-top: 16px; font-size: 0.84rem; color: var(--muted); max-width: 42ch; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 22px; }
+.link {
+  display: inline-block;
+  padding: 8px 0 2px;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  border-bottom: 1px solid var(--ink);
+  transition: letter-spacing 0.25s ease;
+}
+.link:hover { letter-spacing: 0.02em; }
+
+/* ---------- clippy exhibit ---------- */
+
+.clippyPaper {
+  position: relative;
+  width: var(--clippy-size, min(100%, 460px));
+  aspect-ratio: 1;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  background: transparent;
+}
+.clippyLarge { width: 100%; }
+.clippyHost {
+  position: relative;
+  width: 98%;
+  aspect-ratio: 1;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.clippyCanvas, .clippyFallback { position: absolute; inset: 0; width: 100% !important; height: 100% !important; display: block; }
+.clippyFallback { object-fit: contain; }
+.clippySays {
+  position: absolute;
+  top: 7%;
+  right: 7%;
+  font-family: var(--handf);
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  color: var(--pen);
+  rotate: 6deg;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.clippySays[data-on='true'] { opacity: 1; }
+.clippyMoods { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
+.chip {
+  min-height: 42px;
+  padding: 6px 16px;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.chip:nth-child(even) { border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px; }
+.chip:disabled { opacity: 0.4; cursor: default; }
+.chip[data-active='true'], .chip:not(:disabled):hover { background: var(--ink); color: var(--paper); }
+.clippyHint { margin-top: 14px; text-align: center; font-size: 0.8rem; color: var(--muted); }
+.touchOnly { display: none; }
+@media (hover: none) {
+  .touchOnly { display: inline; }
+  .hoverOnly { display: none; }
+}
+
+/* ---------- writing ---------- */
+
+.writing { padding-top: clamp(20px, 6vh, 80px); padding-bottom: clamp(80px, 16vh, 180px); }
+.rows { list-style: none; }
+.row { border-top: 1px solid var(--rule); }
+.row:last-child { border-bottom: 1px solid var(--rule); }
+.rowLink {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.28fr) 2.5rem minmax(0, 1fr) auto;
+  gap: 8px 24px;
+  align-items: center;
+  padding: clamp(22px, 4vh, 42px) 0;
+}
+.rowImage {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--rule);
+}
+.rowImage img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rowIndex { font-size: 1.8rem; }
+.rowMain { display: block; }
+.rowTitle {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 3.8vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  transition: translate 0.35s ease;
+}
+.rowLink:hover .rowTitle { translate: 10px 0; }
+.rowTagline {
+  display: -webkit-box;
+  margin-top: 10px;
+  max-width: 56ch;
+  overflow: hidden;
+  color: var(--muted);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+.rowMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.rowRead { color: var(--ink); }
+.offline { margin-top: 28px; max-width: 30ch; rotate: -1.5deg; }
+.writingAll { margin-top: 40px; text-align: right; }
+
+/* ---------- contact ---------- */
+
+.contact {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 132px var(--gutter) 90px;
+  background: #fff;
+  color: var(--ink);
+}
+.contactTitle {
+  position: relative;
+  font-family: var(--handf);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.1vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--pen);
+}
+.contactTitleUnderline {
+  position: absolute;
+  left: -3%;
+  bottom: -12px;
+  width: 106%;
+  height: 12px;
+  color: var(--pen);
+  overflow: visible;
+}
+.contactTitleUnderline path { stroke-width: 2; }
+.contactFeature {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 1120px);
+  margin: clamp(68px, 11vh, 126px) 0 clamp(42px, 7vh, 78px);
+}
+.contactS, .contactYou {
+  position: relative;
+  z-index: 1;
+  color: var(--pen);
+  font-size: clamp(5rem, 13vw, 12rem);
+  line-height: 0.9;
+  white-space: nowrap;
+}
+.contactS { margin-right: -0.04em; }
+.contactYou { margin-left: 0.02em; }
+.contactGlasses {
+  display: block;
+  width: clamp(280px, 39vw, 650px);
+  height: auto;
+  flex: none;
+  rotate: -16deg;
+}
+.contactDoodle { position: absolute; color: var(--pen); overflow: visible; }
+.contactSpark { width: 46px; height: 46px; left: 10%; top: -17%; rotate: -12deg; }
+.contactPrompt {
+  max-width: 72ch;
+  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.contactCloser {
+  position: relative;
+  width: min(100%, 760px);
+  margin-top: clamp(58px, 9vh, 102px);
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 2.15vw, 2.3rem);
+  line-height: 1.35;
+}
+.contactFlower { width: 58px; height: 58px; left: -12%; top: 5%; }
+.contactCherries { width: 78px; height: 78px; right: -12%; top: -8%; }
+.contactCloserUnderline { width: 100px; height: 16px; left: calc(50% - 50px); bottom: -24px; }
+.contactMail { margin-top: 42px; font-family: var(--display); font-size: clamp(1rem, 1.5vw, 1.3rem); }
+.contactMail a { position: relative; display: inline-block; padding: 8px 0; overflow-wrap: anywhere; }
+.contactLinks { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 30px; margin-top: 34px; }
+.contactLinks .link { font-style: normal; }
+.footer { margin-top: 70px; font-size: 0.74rem; letter-spacing: 0.08em; color: var(--muted); }
+
+/* ---------- article page ---------- */
+
+.articlePage { padding: 120px var(--gutter) 120px; }
+.article { position: relative; max-width: 700px; margin: 0 auto; }
+.articleKicker { display: flex; align-items: baseline; gap: 14px; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.articleTitle {
+  position: relative;
+  margin: 18px 0 30px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.articleUnderline { display: block; width: min(60%, 300px); height: 16px; margin-top: 18px; color: var(--pen); overflow: visible; }
+.articleIntro { font-family: var(--display); font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.25; margin-bottom: 26px; }
+.articleMeta { rotate: -2deg; width: fit-content; margin-bottom: 44px; }
+.articleCover { margin: 0 0 54px; padding: 8px; background: var(--sheet); rotate: -0.7deg; position: relative; }
+.articleCover img { display: block; width: 100%; height: auto; max-height: 70svh; object-fit: contain; }
+.prose { font-size: 1.08rem; line-height: 1.75; overflow-wrap: break-word; }
+.prose > p:first-of-type::first-letter { font-family: var(--display); font-size: 4.2em; line-height: 0.8; float: left; padding: 0.08em 0.1em 0 0; }
+.prose p, .prose ul, .prose ol, .prose blockquote, .prose pre, .prose figure { margin-bottom: 1.3em; }
+.prose h2, .prose h3 { font-family: var(--display); font-weight: 400; line-height: 1.1; margin: 1.8em 0 0.6em; }
+.prose h2 { font-size: 2rem; }
+.prose h3 { font-size: 1.5rem; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose a { border-bottom: 1px solid var(--ink); }
+.prose img { height: auto; }
+.prose blockquote { font-family: var(--display); font-style: italic; font-size: 1.5rem; line-height: 1.3; padding-left: 22px; border-left: 2px solid var(--pen); }
+.prose pre { overflow-x: auto; padding: 16px; background: var(--sheet); font-size: 0.88rem; }
+.section { position: relative; margin-bottom: 64px; }
+.sectionNumber { position: absolute; left: -64px; top: -6px; font-size: 2.1rem; rotate: -6deg; }
+.section h2 { font-family: var(--display); font-weight: 400; font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.1; margin-bottom: 16px; text-transform: lowercase; }
+.section h2::first-letter { text-transform: uppercase; }
+.section p { font-size: 1.08rem; line-height: 1.75; white-space: pre-line; }
+.diagram { margin-top: 26px; padding: 18px; background: var(--sheet); overflow-x: auto; rotate: 0.4deg; }
+.articleBack { display: inline-block; margin-top: 60px; }
+
+/* ---------- mobile ---------- */
+
+@media (max-width: 760px) {
+  .pin { height: 445svh; }
+  .corner { font-size: 1.12rem; bottom: 18px; }
+
+  .about {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto auto auto;
+    align-content: center;
+    row-gap: 24px;
+    padding: 90px var(--gutter) 36px;
+  }
+  .aboutKicker { top: 7%; font-size: 1.2rem; }
+  .aboutArrow { left: clamp(112px, 30vw, 150px); top: 12%; width: 68px; rotate: 20deg; }
+  .aboutHeadline {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    align-self: end;
+    max-width: none;
+    margin: 54px 0 0;
+    font-size: clamp(2.8rem, 10vw, 4.4rem);
+    line-height: 0.98;
+  }
+  .aboutAside {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    min-height: 0;
+    align-self: start;
+    border-left: 1px solid var(--rule);
+    padding: 0 0 0 18px;
+    margin: 0;
+  }
+  .aboutBody { font-size: clamp(1.1rem, 4.4vw, 1.45rem); line-height: 1.42; }
+  .aboutBodyMark { right: 2%; bottom: -1.1em; width: 100px; }
+  .aboutSummary {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 14px;
+  }
+  .aboutPoint {
+    min-height: 42px;
+    padding: 10px 8px 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+    font-size: clamp(0.95rem, 3.4vw, 1.2rem);
+    white-space: normal;
+  }
+  .aboutPointIcon { width: 26px; }
+
+  .sectionHead { margin-bottom: 64px; }
+  .sectionTitle { font-size: clamp(3rem, 15vw, 4.6rem); }
+  .works .sectionTitle, .writing .sectionTitle { font-size: clamp(2.8rem, 10vw, 4.4rem); }
+
+  .project {
+    display: block;
+    top: calc(64px + var(--stack-index, 0) * 8px);
+    min-height: calc(100svh - 64px);
+    margin-bottom: 16px;
+    padding: 34px var(--gutter) 42px;
+    border-radius: 2rem 2rem 0 0;
+  }
+  .media { margin-bottom: 30px; }
+  .tall .frame img { max-height: 62svh; }
+  .flip .info, .offset .info { padding: 0; }
+  .mediaNote { margin-left: 4%; }
+  .projectText, .stack { max-width: none; }
+  .link { font-size: 1.2rem; padding: 12px 0 2px; }
+  .chip { font-size: 1.05rem; padding: 6px 14px; }
+
+  .contact { min-height: 100svh; padding: 112px var(--gutter) 76px; }
+  .contactTitle { font-size: 1.2rem; }
+  .contactFeature {
+    width: calc(100vw - 2 * var(--gutter));
+    margin: 92px 0 48px;
+  }
+  .contactS, .contactYou { font-size: clamp(3rem, 15vw, 6rem); }
+  .contactGlasses { width: 50vw; }
+  .contactSpark { width: 34px; height: 34px; left: 4%; top: -28%; }
+  .contactPrompt { font-size: clamp(1.2rem, 4.8vw, 1.65rem); line-height: 1.5; letter-spacing: 0.04em; }
+  .contactCloser { width: 100%; margin-top: 70px; font-size: clamp(1.1rem, 4.4vw, 1.45rem); }
+  .contactFlower { width: 38px; height: 38px; left: -3%; top: -32%; }
+  .contactCherries { width: 48px; height: 48px; right: -3%; top: 74%; }
+  .contactMail { margin-top: 40px; font-size: 1rem; }
+  .contactLinks { gap: 8px 22px; margin-top: 24px; }
+  .footer { margin-top: 52px; }
+
+  .rowLink { grid-template-columns: 88px 2.2rem minmax(0, 1fr); gap: 8px 12px; padding: 24px 0; }
+  .rowMeta { grid-column: 3; flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+  .writingAll { text-align: left; }
+
+  .sectionNumber { position: static; display: block; margin-bottom: 4px; }
+  .articlePage { padding-top: 96px; }
+}
+
+/* Apjot bodies carry inline editor styles; neutralise them so essays sit on the paper. */
+.prose * { background: transparent !important; color: inherit !important; font-family: inherit !important; font-size: inherit; line-height: inherit; }
+.prose p:empty, .prose p:has(> br:only-child) { display: none; }
+.prose blockquote { font-family: var(--display) !important; }
+
+
+/* ---------- works, cleaned up: one scene per project ----------
+   Overrides the earlier scrapbook treatment (tape, tilt, paper frames) with a
+   calmer system: big title, one line-framed view, a short column of text.
+   Sides alternate; nothing is rotated; no shadows. */
+
+.project {
+  /* reset the stacked colour-card treatment */
+  position: static;
+  top: auto;
+  z-index: auto;
+  width: auto;
+  min-height: 0;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  color: inherit;
+  background: none;
+  border-radius: 0;
+  --ink: #1b1a18;
+  --muted: #6d685f;
+  --rule: #e2e0db;
+  --paper: #ffffff;
+  --sheet: #ffffff;
+  /* each project keeps one accent, used only for its number and pen note */
+  --pen: var(--project-accent, #2536c4);
+
+  grid-template-rows: auto auto;
+  row-gap: clamp(28px, 5vh, 56px);
+  align-items: start;
+  margin-bottom: clamp(140px, 26vh, 300px);
+  padding-top: clamp(28px, 5vh, 56px);
+  border-top: 1px solid var(--rule);
+}
+.sceneHead { grid-column: 1 / -1; grid-row: 1; display: flex; align-items: baseline; gap: clamp(12px, 1.6vw, 26px); }
+.sceneIndex { font-size: clamp(1.6rem, 2.4vw, 2.4rem); }
+.sceneTitle {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 8.4vw, 8rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+.project .media { grid-row: 2; rotate: none; perspective: none; }
+.project .info { grid-row: 2; align-self: end; padding: 0 0 6px; }
+
+.left .media { grid-column: 1 / 9; }
+.left .info { grid-column: 9 / 13; }
+.right .sceneHead { justify-content: flex-end; text-align: right; }
+.right .media { grid-column: 5 / 13; }
+.right .info { grid-column: 1 / 5; }
+.narrow.left .media { grid-column: 2 / 7; }
+.narrow.left .info { grid-column: 8 / 13; align-self: center; }
+.narrow.right .media { grid-column: 7 / 12; }
+.narrow.right .info { grid-column: 1 / 6; align-self: center; }
+
+.project .kind { margin-bottom: 16px; }
+.project .projectText { font-size: 1.02rem; }
+.project .mediaNote { margin: 16px 0 0 4%; }
+
+/* Clippy keeps his sheet but loses the tape and tilt. */
+.project .clippyPaper { box-shadow: none; outline: 1.5px solid var(--ink); border-radius: 10px; }
+.project .clippyPaper::before { display: none; }
+
+@media (max-width: 760px) {
+  .project { display: block; top: auto; min-height: 0; margin-bottom: 120px; padding: 26px 0 0; border-radius: 0; }
+  .sceneHead { margin-bottom: 26px; }
+  .right .sceneHead { justify-content: flex-start; text-align: left; }
+  .sceneTitle { font-size: clamp(2.6rem, 13vw, 4rem); }
+  .project .media { margin-bottom: 30px; }
+  .project .info { padding: 0; }
+}
+
+
+/* ---------- works: one screen per project ---------- */
+
+.project {
+  min-height: 100svh;
+  margin-bottom: 0;
+  padding-top: clamp(84px, 11vh, 120px); /* clears the fixed nav */
+  padding-bottom: clamp(28px, 5vh, 56px);
+  grid-template-rows: auto 1fr;
+  align-content: start;
+}
+.project .media { align-self: center; }
+.project .info { align-self: center; padding: 0; }
+.narrow.left .info, .narrow.right .info { align-self: center; }
+.project .browserFit { max-width: 100%; }
+
+/* Clippy: box flush left, text beside it towards the middle of the page. */
+.project:has(.clippyPaper) .media { grid-column: 1 / 6; }
+.project:has(.clippyPaper) .info { grid-column: 7 / 12; }
+.project .clippyPaper { margin: 0; width: 100%; height: min(46svh, 460px); aspect-ratio: auto; overflow: hidden; }
+.project .clippyHost { width: auto; height: 100%; }
+.project .clippyCanvas { scale: 1.25; }
+.project .clippyMoods { justify-content: flex-start; margin-top: 18px; }
+.project .clippyHint { text-align: left; margin-top: 10px; }
+.project:has(.clippyPaper) .mediaNote { margin-top: 8px; }
+
+/* Project links are written in pen. */
+.project .link {
+  font-family: var(--handf);
+  font-style: normal;
+  font-size: 1.75rem;
+  line-height: 1.1;
+  color: var(--pen);
+  border-bottom: 1.5px solid currentColor;
+  padding: 6px 0 0;
+}
+.project .link:hover { letter-spacing: 0.03em; }
+.project .links { gap: 10px 30px; margin-top: 26px; }
+
+@media (max-width: 760px) {
+  .project { min-height: 100svh; margin-bottom: 0; padding: 84px 0 48px; }
+  .project .clippyPaper { height: min(44svh, 380px); }
+  .project .link { font-size: 1.6rem; }
+}
+
+.bareMedia img { display: block; height: min(64svh, 680px); width: auto; max-width: 100%; margin: 0 auto; }
+@media (max-width: 760px) { .bareMedia img { height: min(62svh, 540px); } }
+
+/* Every project carries one pen note under its view; keep it tight so the scene stays one screen. */
+.project .mediaNote { margin: 10px 0 0 4%; }
+.project .browser img { max-height: 53svh; object-fit: cover; object-position: top; }
+.bareMedia img { height: min(60svh, 640px); }
+.bareMedia + .mediaNote { margin-left: 30%; }
+
+/* Contact: everything in the pen handwriting face, like the project links. */
+.contact .contactMail,
+.contact .contactMail a,
+.contact .contactLinks .link,
+.contact .footer {
+  font-family: var(--handf);
+  font-style: normal;
+  letter-spacing: 0;
+}
+.contact .contactLinks .link { font-size: 1.75rem; line-height: 1.1; color: var(--pen); border-bottom: 1.5px solid currentColor; }
+.contact .contactMail a { color: var(--pen); font-size: clamp(1.7rem, 2.6vw, 2.3rem); }
+.contact .footer { font-size: 1.15rem; }
+
+/* "Contact me" is a section title like Selected works and Writing: serif display face. The
+   closing line under the glasses is ordinary serif text. Only links, email and footer stay in pen. */
+.contact .contactTitle {
+  width: fit-content;
+  font-family: var(--display);
+  font-size: clamp(3.2rem, 6.1vw, 6.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: none;
+  color: var(--ink);
+}
+.contact .contactTitleUnderline { color: var(--pen); }
+.contact .contactCloser p { font-family: var(--display); font-style: normal; letter-spacing: -0.01em; }
+@media (max-width: 760px) { .contact .contactTitle { font-size: clamp(2.8rem, 10vw, 4.4rem); } }
+.contact .contactTitleUnderline { display: none; }

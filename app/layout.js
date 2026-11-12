@@ -1,8 +1,8 @@
-import '../style/style.css';
+import './globals.css';
 
 export const metadata = {
-  title: 'Portfolio Nelson Fai',
-  description: 'Web development portfolio of Nelson Fai',
+  title: 'Nelson Fai',
+  description: 'Full-stack engineer who also writes. Selected works, writing and experiments.',
   icons: { icon: '/images/favicon.png' },
 };
 

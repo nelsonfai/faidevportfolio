@@ -1,10 +1,10 @@
-import Portfolio from '../portfolio';
+import HomePage from '../home-page';
 
 export const metadata = {
-  title: 'Portfolio Nelson Fai',
-  description: 'Webentwicklungs-Portfolio von Nelson Fai',
+  title: 'Nelson Fai',
+  description: 'Ausgewählte Arbeiten, Texte und Experimente von Nelson Fai: Software, Schreiben und Musik.',
 };
 
 export default function GermanHomePage() {
-  return <Portfolio language="de" />;
+  return <HomePage language="de" />;
 }
