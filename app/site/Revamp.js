@@ -12,22 +12,6 @@ import ClippyStage from './ClippyStage';
 import Hero from './Hero';
 import s from './site.module.css';
 
-const SUMMARY_ICONS = {
-  code: ['M12 5 5 12l7 7', 'm12 5 7 7-7 7', 'M14 4 10 20'],
-  book: ['M3 5.5c3.5-1.8 7-1.8 9 0v15c-2-1.8-5.5-1.8-9 0z', 'M21 5.5c-3.5-1.8-7-1.8-9 0v15c2-1.8 5.5-1.8 9 0z'],
-  music: ['M3 14v-2a9 9 0 0 1 18 0v2', 'M3 14h4v7H5a2 2 0 0 1-2-2z', 'M21 14h-4v7h2a2 2 0 0 0 2-2z'],
-  sparkle: ['m12 3 1.9 6.1L20 11l-6.1 1.9L12 19l-1.9-6.1L4 11l6.1-1.9L12 3z', 'm19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16z'],
-};
-const SUMMARY_POINTS = ['code', 'book', 'music', 'sparkle'];
-
-function SummaryIcon({ type }) {
-  return (
-    <svg className={s.aboutPointIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      {SUMMARY_ICONS[type].map((path) => <path key={path} d={path} />)}
-    </svg>
-  );
-}
-
 // Each project is a scene: a large title, one framed view of the product and a
 // short note beside it. Two alternating compositions keep the rhythm even;
 // the frame (browser or phone) follows what the product actually is.
@@ -245,8 +229,10 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
       </div>
 
       <section className={s.about} id="about">
-        <p className={`${s.hand} ${s.aboutKicker}`} data-rise="">{t.aboutKicker}</p>
-        <Mark type="arrow" className={s.aboutArrow} group="scroll" />
+        <p className={`${s.hand} ${s.aboutKicker}`} data-rise="">
+          {t.aboutKicker}
+          <Mark type="arrowDown" className={s.aboutArrow} group="scroll" />
+        </p>
         <h2 className={s.aboutHeadline} data-rise="">
           <span className={s.aboutCircled}>{t.aboutHeadline[0]}<Mark type="circle" className={s.aboutCircleMark} group="scroll" /></span>{t.aboutHeadline[1]}
         </h2>
@@ -254,14 +240,15 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
           <p className={s.aboutBody}>{t.aboutBody}</p>
           <Mark type="doubleUnderline" className={s.aboutBodyMark} group="scroll" />
         </div>
-        <div className={s.aboutSummary}>
-          {SUMMARY_POINTS.map((point, index) => (
-            <div className={s.aboutPoint} key={point}>
-              <span>{t.aboutPoints[index]}</span>
-              <SummaryIcon type={point} />
-            </div>
+        {/* Same numbering device as the project scenes: pen index, serif label, thin rule. */}
+        <ol className={s.aboutSummary}>
+          {t.aboutPoints.map((point, index) => (
+            <li className={s.aboutPoint} key={point} data-rise="">
+              <span className={`${s.hand} ${s.aboutPointIndex}`}>{String(index + 1).padStart(2, '0')}</span>
+              <span>{point}</span>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
       <section className={s.works} id="works">
