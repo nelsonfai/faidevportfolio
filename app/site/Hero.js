@@ -19,7 +19,6 @@ const ITEMS = [
 ];
 const PUZZLE_ITEMS = ['cap', 'notebook', 'ring', 'earphones', 'glasses', 'blue-pen'];
 const PUZZLE_ICONS = { cap: '🎩', notebook: '📖', ring: '💍', earphones: '🎵', glasses: '👓', 'blue-pen': '🖊️' };
-const PUZZLE_ANSWERS = { cap: '8', notebook: '1', ring: '3', earphones: '5', glasses: '6', 'blue-pen': '2' };
 
 // Notes follow the prototype's wording.
 const NOTES = {
@@ -286,11 +285,44 @@ export default function Hero({ language = 'en', assets }) {
   const instructionsDialogRef = useRef(null);
   const openMusicClue = useCallback(() => musicDialogRef.current?.showModal(), []);
   const [puzzleValues, setPuzzleValues] = useState(() => PUZZLE_ITEMS.map(() => ''));
+  const [puzzleStatuses, setPuzzleStatuses] = useState(() => PUZZLE_ITEMS.map(() => ''));
+  const [puzzleSolved, setPuzzleSolved] = useState(false);
   const puzzleComplete = puzzleValues.every((value) => value.trim() !== '');
-  const puzzleSolved = puzzleComplete && PUZZLE_ITEMS.every((id, index) => puzzleValues[index] === PUZZLE_ANSWERS[id]);
   const notes = NOTES[language];
   const hintCopy = HINT_COPY[language] || HINT_COPY.en;
   const gameInstructions = GAME_INSTRUCTIONS[language] || GAME_INSTRUCTIONS.en;
+
+  useEffect(() => {
+    if (!puzzleComplete) {
+      setPuzzleStatuses(PUZZLE_ITEMS.map(() => ''));
+      setPuzzleSolved(false);
+      return undefined;
+    }
+
+    const controller = new AbortController();
+    fetch('/api/puzzle/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ values: puzzleValues }),
+      signal: controller.signal,
+    })
+      .then((response) => (response.ok ? response.json() : Promise.reject(new Error('Validation failed'))))
+      .then(({ statuses, solved }) => {
+        if (Array.isArray(statuses) && statuses.length === PUZZLE_ITEMS.length) {
+          setPuzzleStatuses(statuses);
+          setPuzzleSolved(Boolean(solved));
+        }
+      })
+      .catch((error) => {
+        if (error.name !== 'AbortError') {
+          setPuzzleStatuses(PUZZLE_ITEMS.map(() => ''));
+          setPuzzleSolved(false);
+        }
+      });
+
+    return () => controller.abort();
+  }, [puzzleComplete, puzzleValues]);
+
   return (
     <div className={h.layer} data-hero="">
       <div className={h.box} data-hero-box="">
@@ -321,11 +353,7 @@ export default function Hero({ language = 'en', assets }) {
           {PUZZLE_ITEMS.map((id, index) => {
             const item = ITEMS.find((entry) => entry.id === id);
             const value = puzzleValues[index];
-            const status = !puzzleComplete ? '' : value === PUZZLE_ANSWERS[id]
-              ? 'correct'
-              : PUZZLE_ITEMS.some((otherId) => otherId !== id && value === PUZZLE_ANSWERS[otherId])
-                ? 'misplaced'
-                : 'incorrect';
+            const status = puzzleStatuses[index];
             return (
               <div className={h.puzzleSlot} key={id}>
                 <input
