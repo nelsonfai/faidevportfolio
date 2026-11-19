@@ -133,7 +133,7 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
             }
             capItem.dataset.shaking = 'true';
             window.clearTimeout(capShakeTimeout);
-            capShakeTimeout = window.setTimeout(() => { delete capItem.dataset.shaking; }, 650);
+            capShakeTimeout = window.setTimeout(() => { delete capItem.dataset.shaking; }, 2000);
           };
           const stopCapShakes = () => {
             window.clearInterval(capShakeInterval);
@@ -364,29 +364,56 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
       <section className={s.contact} id="contact">
         <div className={s.contactFeature} data-rise="">
           <Mark type="sparks" className={`${s.contactDoodle} ${s.contactSpark}`} group="scroll" />
-          <span className={`${s.hand} ${s.contactS}`}>S</span>
-          <Image className={s.contactGlasses} src="/rv/hero/glasses-contact.webp" alt={language === 'de' ? 'Brille' : 'Glasses'} width={1728} height={910} quality={90} sizes="(max-width: 760px) 50vw, min(39vw, 650px)" />
-          <span className={`${s.hand} ${s.contactYou}`}>you!</span>
+          <Image className={s.contactGlasses} src="/rv/hero/glasses-contact.webp" alt={language === 'de' ? 'Brille' : 'Glasses'} width={1728} height={910} quality={90} sizes="(max-width: 760px) 48vw, 28vw" />
         </div>
-        <p className={`${s.hand} ${s.contactPrompt}`} data-rise="">
-          {t.contactPrompt} {t.contactCloser}
-          <Mark type="flower" className={`${s.contactDoodle} ${s.contactFlower}`} group="scroll" />
-          <Mark type="doubleUnderline" className={`${s.contactDoodle} ${s.contactCloserUnderline}`} group="scroll" />
-          <Mark type="cherries" className={`${s.contactDoodle} ${s.contactCherries}`} group="scroll" />
-        </p>
-        <section className={s.todoNote} aria-labelledby="todo-title">
-          <h3 className={s.todoTitle} id="todo-title">{t.todoTitle}</h3>
-          <ul className={s.todoList}>
-            {t.todoItems.map((item) => (
-              <li className={s.todoItem} key={item}>
-                <label>
-                  <input type="checkbox" />
-                  <span>{item}</span>
-                </label>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <div className={s.todoStage}>
+          <svg className={s.todoDoodles} viewBox="0 0 900 520" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M284 405v25m332-25v25" fill="none" stroke="var(--paper)" strokeLinecap="round" strokeWidth="10" />
+            <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3">
+              <path d="M145 224C97 212 68 183 63 141" />
+              <path d="M63 141c-24 3-25-20-7-21-15-14 1-29 12-10 1-21 22-17 18 1 18-13 28 5 11 16-10 7-20 11-34 14Z" />
+              <path d="M754 255c42 28 62 14 82-3" />
+              <path d="M835 244v-13m16 19 11-8m-6 25 14-1" />
+              <path d="M284 405v25m332-25v25" strokeDasharray="8 10" />
+            </g>
+            <g fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="3">
+              <path d="m43 105-9-7m24-16-2-12m18 15 6-11" />
+            </g>
+          </svg>
+          <svg className={s.todoDoodlesMobile} viewBox="0 0 390 480" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M100 397v20m190-20v20" fill="none" stroke="var(--paper)" strokeLinecap="round" strokeWidth="10" />
+            <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3">
+              <path d="M100 397v20m190-20v20" strokeDasharray="7 9" />
+            </g>
+          </svg>
+          <section className={s.todoNote} aria-labelledby="todo-title">
+            <h3 className={s.todoTitle} id="todo-title">{t.todoTitle}</h3>
+            <ul className={s.todoList}>
+              {t.todoItems.map((item) => (
+                <li className={s.todoItem} key={item}>
+                  <label>
+                    <input type="checkbox" />
+                    <span>{item}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+            <Image className={s.todoPen} src="/rv/hero/prototype/black-pen.webp" alt="" aria-hidden="true" width={229} height={425} sizes="(max-width: 760px) 72px, 170px" />
+          </section>
+        </div>
+        <div className={s.contactPrompt} data-rise="">
+          <div className={s.contactColumns}>
+            <p>{t.contactPrompt}</p>
+            <p>{t.contactCloser}</p>
+          </div>
+          <svg className={s.contactShoes} viewBox="0 0 640 110" preserveAspectRatio="none" aria-hidden="true">
+            <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3">
+              <path d="M154 0v42m332-42v42" strokeDasharray="7 9" />
+              <path d="M122 91c8-17 21-26 42-27l20 27-62 5Zm332 0c8-17 21-26 42-27l20 27-62 5Z" />
+              <path d="m121 70-8-7m17-2-4-10m74 17 8-7m-17-2 4-10m246 21-8-7m17-2-4-10m74 17 8-7m-17-2 4-10" />
+            </g>
+          </svg>
+        </div>
       </section>
     </main>
   );

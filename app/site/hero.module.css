@@ -81,14 +81,18 @@
 }
 .i-cap { --x: 3%; --y: 27%; --w: 17%; }
 .i-cap { z-index: 4; }
-.i-cap[data-shaking='true'] .itemIn { transform-origin: center center; animation: capSettleNudge 650ms ease-in-out both; }
+.i-cap[data-shaking='true'] .itemIn { transform-origin: center center; animation: capSettleNudge 2s ease-in-out both; }
 @keyframes capSettleNudge {
   0%, 100% { transform: rotate(0deg) translateY(0); }
-  15% { transform: rotate(-4.5deg) translateY(-3px); }
-  35% { transform: rotate(3.8deg) translateY(1px); }
-  55% { transform: rotate(-2.8deg) translateY(-1px); }
-  75% { transform: rotate(1.7deg) translateY(0); }
-  88% { transform: rotate(-0.7deg) translateY(0); }
+  10% { transform: rotate(-4.5deg) translateY(-3px); }
+  20% { transform: rotate(3.8deg) translateY(1px); }
+  30% { transform: rotate(-3.5deg) translateY(-2px); }
+  40% { transform: rotate(3deg) translateY(1px); }
+  50% { transform: rotate(-2.5deg) translateY(-1px); }
+  60% { transform: rotate(2deg) translateY(1px); }
+  70% { transform: rotate(-1.4deg) translateY(0); }
+  82% { transform: rotate(0.8deg) translateY(0); }
+  92% { transform: rotate(-0.4deg) translateY(0); }
 }
 .i-notebook { --x: 29.5%; --y: 16.2%; --w: 19.5%; z-index: 4; }
 .i-ring { --x: 63%; --y: 34%; --w: 4.7%; }
