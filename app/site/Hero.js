@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Mark } from './Marks';
 import h from './hero.module.css';
 
@@ -16,11 +17,39 @@ const ITEMS = [
   { id: 'blue-pen', alt: { en: 'Blue pen', de: 'Blauer Stift' } },
   { id: 'black-pen', alt: { en: 'Black pen', de: 'Schwarzer Stift' } },
 ];
+const PUZZLE_ITEMS = ['cap', 'notebook', 'ring', 'earphones', 'glasses', 'blue-pen'];
+const PUZZLE_ICONS = { cap: '🎩', notebook: '📖', ring: '💍', earphones: '🎵', glasses: '👓', 'blue-pen': '🖊️' };
+const PUZZLE_ANSWERS = { cap: '8', notebook: '1', ring: '3', earphones: '5', glasses: '6', 'blue-pen': '2' };
 
 // Notes follow the prototype's wording.
 const NOTES = {
-  en: { cap: ['my everyday cap'], word: ['the word'], ring: 'ring ring ring', music: ['music', 'always'], see: ['that I might', 'C#'], pens: ['notes,', 'ideas,', 'plans'] },
-  de: { cap: ['meine Alltags-Cap'], word: ['das Wort'], ring: 'ring ring ring', music: ['Musik,', 'immer'], see: ['that I might', 'C#'], pens: ['Notizen,', 'Ideen,', 'Pläne'] },
+  en: { cap: ['Cap On, Ace It'], word: ['the word'], ring: 'ring ring ring', music: ['music', 'always'], see: ['Mr. Snellen’s', 'Stand?'], pens: ['notes,', 'ideas,', 'plans'] },
+  de: { cap: ['Cap On, Ace It'], word: ['das Wort'], ring: 'ring ring ring', music: ['Musik,', 'immer'], see: ['Mr. Snellen’s', 'Stand?'], pens: ['Notizen,', 'Ideen,', 'Pläne'] },
+};
+const HINT_COPY = {
+  en: { title: 'Hint', clue: 'Ephesians 4:5' },
+  de: { title: 'Hinweis', clue: 'Epheser 4:5' },
+};
+const PLAY_CLUE_COPY = { en: 'Play', de: 'Abspielen' };
+const GAME_INSTRUCTIONS = {
+  en: {
+    title: 'How to play',
+    steps: [
+      'Guess the six-digit PIN.',
+      "Green means the digit is in the correct position, yellow means it's in the wrong position, and gray means it's not in the code.",
+      'Find clues hidden throughout the hero section.',
+      'Have fun !',
+    ],
+  },
+  de: {
+    title: 'So funktioniert’s',
+    steps: [
+      'Errate den sechsstelligen PIN.',
+      'Grün bedeutet, dass die Ziffer an der richtigen Stelle steht. Gelb bedeutet, dass sie an der falschen Stelle steht, und Grau bedeutet, dass sie nicht im PIN vorkommt.',
+      'Finde die Hinweise, die im gesamten Hero-Bereich versteckt sind.',
+      'Viel Spaß!',
+    ],
+  },
 };
 
 const fit = { preserveAspectRatio: 'xMidYMid meet' };
@@ -32,6 +61,188 @@ function Note({ className, lines, underline = 'doubleUnderline' }) {
       {underline && <Mark type={underline} className={h.noteUnderline} />}
     </p>
   );
+}
+
+function DraggableItem({ item, asset, language, index, cursorRef, onEarphonesMoved }) {
+  const itemRef = useRef(null);
+  const imageRef = useRef(null);
+  const dragRef = useRef(null);
+  const alphaRef = useRef(null);
+  const offsetRef = useRef({ x: 0, y: 0 });
+  const pendingOffsetRef = useRef({ x: 0, y: 0 });
+  const frameRef = useRef(0);
+
+  useEffect(() => {
+    const image = imageRef.current;
+    if (!image) return undefined;
+
+    const createAlphaOutline = () => {
+      if (!image.naturalWidth || !image.naturalHeight) return;
+      const width = image.naturalWidth;
+      const height = image.naturalHeight;
+      const source = document.createElement('canvas');
+      source.width = width;
+      source.height = height;
+      const sourceContext = source.getContext('2d', { willReadFrequently: true });
+      if (!sourceContext) return;
+      sourceContext.drawImage(image, 0, 0);
+      const pixels = sourceContext.getImageData(0, 0, width, height).data;
+      const alpha = new Uint8Array(width * height);
+      for (let i = 0, pixel = 0; i < pixels.length; i += 4, pixel += 1) alpha[pixel] = pixels[i + 3];
+      alphaRef.current = { width, height, data: alpha };
+
+    };
+
+    if (image.complete) createAlphaOutline();
+    else image.addEventListener('load', createAlphaOutline);
+    return () => image.removeEventListener('load', createAlphaOutline);
+  }, [asset.src]);
+  const rotation = (element) => {
+    if (!element) return 0;
+    const style = getComputedStyle(element);
+    const ownRotation = style.rotate === 'none' ? 0 : Number.parseFloat(style.rotate) || 0;
+    const transformRotation = style.transform === 'none'
+      ? 0
+      : Math.atan2(new DOMMatrixReadOnly(style.transform).b, new DOMMatrixReadOnly(style.transform).a) * (180 / Math.PI);
+    return ownRotation + transformRotation;
+  };
+  const screenDeltaToLocal = (x, y, degrees = rotation(itemRef.current)) => {
+    const radians = degrees * (Math.PI / 180);
+    const cos = Math.cos(radians);
+    const sin = Math.sin(radians);
+    return { x: x * cos + y * sin, y: -x * sin + y * cos };
+  };
+
+  const setOffset = (x, y) => {
+    offsetRef.current = { x, y };
+    pendingOffsetRef.current = { x, y };
+    if (frameRef.current) return;
+    frameRef.current = requestAnimationFrame(() => {
+      const next = pendingOffsetRef.current;
+      const element = itemRef.current;
+      if (element) element.style.translate = `${next.x}px ${next.y}px`;
+      frameRef.current = 0;
+    });
+  };
+
+  const isActivePixel = (event) => {
+    const mask = alphaRef.current;
+    const element = itemRef.current;
+    if (!mask || !element || !element.clientWidth || !element.clientHeight) return false;
+    const x = Math.floor((event.nativeEvent.offsetX / element.clientWidth) * mask.width);
+    const y = Math.floor((event.nativeEvent.offsetY / element.clientHeight) * mask.height);
+    return x >= 0 && y >= 0 && x < mask.width && y < mask.height && mask.data[y * mask.width + x] > 24;
+  };
+
+  const updateActiveHover = (event) => {
+    const element = itemRef.current;
+    if (!element) return;
+    if (event.pointerType === 'touch') {
+      delete element.dataset.activeHover;
+      hideCursor(cursorRef.current);
+      return;
+    }
+    if (isActivePixel(event)) {
+      element.dataset.activeHover = 'true';
+      moveCursor(event, cursorRef.current, 'move');
+    } else {
+      delete element.dataset.activeHover;
+      hideCursor(cursorRef.current);
+    }
+  };
+
+  const moveCursor = (event, cursor, state) => {
+    if (!cursor) return;
+    cursor.dataset.state = state;
+    const touchLift = event.pointerType === 'touch' ? -36 : 0;
+    cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY + touchLift}px, 0) translate(-50%, -50%)`;
+    cursor.dataset.visible = 'true';
+  };
+
+  const onPointerDown = (event) => {
+    if (event.button !== 0) return;
+    if (!isActivePixel(event)) return;
+    event.preventDefault();
+    event.currentTarget.setPointerCapture(event.pointerId);
+    event.currentTarget.dataset.dragging = 'true';
+    moveCursor(event, cursorRef.current, 'moving');
+    dragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      startOffset: offsetRef.current,
+      rotation: rotation(itemRef.current) + rotation(itemRef.current?.querySelector('[data-hero-item-in]')),
+      hasMoved: false,
+    };
+  };
+
+  const onPointerMove = (event) => {
+    const drag = dragRef.current;
+    if (!drag) { updateActiveHover(event); return; }
+    if (drag.pointerId !== event.pointerId) return;
+    if (Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) > 4) drag.hasMoved = true;
+    moveCursor(event, cursorRef.current, 'moving');
+    const movement = screenDeltaToLocal(event.clientX - drag.startX, event.clientY - drag.startY, drag.rotation);
+    setOffset(
+      drag.startOffset.x + movement.x,
+      drag.startOffset.y + movement.y,
+    );
+  };
+
+  const endDrag = (event) => {
+    if (dragRef.current?.pointerId !== event.pointerId) return;
+    const shouldOpenMusicClue = item.id === 'earphones' && dragRef.current.hasMoved;
+    dragRef.current = null;
+    delete event.currentTarget.dataset.dragging;
+    hideCursor(cursorRef.current);
+    updateActiveHover(event);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    if (shouldOpenMusicClue) onEarphonesMoved?.();
+  };
+
+  const onKeyDown = (event) => {
+    const step = event.shiftKey ? 20 : 8;
+    const directions = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] };
+    const direction = directions[event.key];
+    if (!direction) return;
+    event.preventDefault();
+    const movement = screenDeltaToLocal(direction[0], direction[1]);
+    setOffset(offsetRef.current.x + movement.x, offsetRef.current.y + movement.y);
+  };
+
+  const hint = language === 'de' ? 'mit Ziehen oder Pfeiltasten verschieben' : 'drag or use arrow keys to move';
+
+  return (
+    <div
+      ref={itemRef}
+      className={`${h.item} ${h[`i-${item.id}`]}`}
+      data-hero-item={item.id}
+      role="group"
+      tabIndex={0}
+      aria-label={`${item.alt[language]}, ${hint}`}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerEnter={updateActiveHover}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+      onLostPointerCapture={endDrag}
+      onPointerLeave={() => {
+        if (!dragRef.current) {
+          delete itemRef.current.dataset.activeHover;
+          hideCursor(cursorRef.current);
+        }
+      }}
+      onKeyDown={onKeyDown}
+    >
+      <div className={h.itemIn} data-hero-item-in="">
+        <img ref={imageRef} src={asset.src} width={asset.w} height={asset.h} alt="" decoding="async" fetchPriority={index < 2 ? 'high' : 'auto'} draggable="false" />
+      </div>
+    </div>
+  );
+}
+
+function hideCursor(cursor) {
+  if (cursor) delete cursor.dataset.visible;
 }
 
 // "the making of Fai" as monoline strokes, in writing order, so it can be
@@ -68,20 +279,34 @@ const SIGNATURE_INTRO = [
 ];
 
 export default function Hero({ language = 'en', assets }) {
+  const cursorRef = useRef(null);
+  const puzzleInputsRef = useRef([]);
+  const hintDialogRef = useRef(null);
+  const musicDialogRef = useRef(null);
+  const instructionsDialogRef = useRef(null);
+  const openMusicClue = useCallback(() => musicDialogRef.current?.showModal(), []);
+  const [puzzleValues, setPuzzleValues] = useState(() => PUZZLE_ITEMS.map(() => ''));
+  const puzzleComplete = puzzleValues.every((value) => value.trim() !== '');
+  const puzzleSolved = puzzleComplete && PUZZLE_ITEMS.every((id, index) => puzzleValues[index] === PUZZLE_ANSWERS[id]);
   const notes = NOTES[language];
+  const hintCopy = HINT_COPY[language] || HINT_COPY.en;
+  const gameInstructions = GAME_INSTRUCTIONS[language] || GAME_INSTRUCTIONS.en;
   return (
     <div className={h.layer} data-hero="">
       <div className={h.box} data-hero-box="">
         {ITEMS.map((item, index) => {
           const asset = assets[item.asset || item.id];
-          return (
-            <div key={item.id} className={`${h.item} ${h[`i-${item.id}`]}`} data-hero-item={item.id}>
-              <div className={h.itemIn} data-hero-item-in="">
-                <img src={asset.src} width={asset.w} height={asset.h} alt={item.alt[language]} decoding="async" fetchPriority={index < 2 ? 'high' : 'auto'} draggable="false" />
-              </div>
-            </div>
-          );
+          return <DraggableItem key={item.id} item={item} asset={asset} language={language} index={index} cursorRef={cursorRef} onEarphonesMoved={openMusicClue} />;
         })}
+        <span className={h.capNumber} data-hero-cap-number="" aria-hidden="true">8</span>
+        <button className={h.bookHint} data-hero-hint="" type="button" onClick={() => hintDialogRef.current?.showModal()} aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18h6m-5 3h4m-2-19a7 7 0 0 0-4 12.7c.6.4 1 1 1 1.8h6c0-.8.4-1.4 1-1.8A7 7 0 0 0 12 2Z" /></svg>
+          <span>Hint</span>
+        </button>
+
+        <div ref={cursorRef} className={h.customCursor} aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18M12 3 9 6m3-3 3 3M21 12l-3-3m3 3-3 3M12 21l-3-3m3 3 3-3M3 12l3-3m-3 3 3 3" /></svg>
+        </div>
 
         <div className={h.sign} data-hero-sign="">
           <svg className={h.signMain} viewBox="0 0 1220 165" fill="none" role="img" aria-label="the making of Fai" {...fit}>
@@ -91,6 +316,96 @@ export default function Hero({ language = 'en', assets }) {
             {SIGNATURE_INTRO.map((d) => <path key={d} d={d} pathLength="1" data-sign-a="" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />)}
           </svg>
         </div>
+
+        <div className={h.puzzle} data-hero-puzzle="" role="group" aria-label={language === 'de' ? 'Zahlenrätsel' : 'Number puzzle'}>
+          {PUZZLE_ITEMS.map((id, index) => {
+            const item = ITEMS.find((entry) => entry.id === id);
+            const value = puzzleValues[index];
+            const status = !puzzleComplete ? '' : value === PUZZLE_ANSWERS[id]
+              ? 'correct'
+              : PUZZLE_ITEMS.some((otherId) => otherId !== id && value === PUZZLE_ANSWERS[otherId])
+                ? 'misplaced'
+                : 'incorrect';
+            return (
+              <div className={h.puzzleSlot} key={id}>
+                <input
+                  ref={(element) => { puzzleInputsRef.current[index] = element; }}
+                  className={h.puzzleInput}
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  autoComplete="off"
+                  aria-label={`${language === 'de' ? 'Zahl für' : 'Number for'} ${item.alt[language]}`}
+                  aria-invalid={puzzleComplete && status !== 'correct'}
+                  data-validation={status || undefined}
+                  value={value}
+                  onChange={(event) => {
+                    const nextValue = event.target.value;
+                    if (!/^\d?$/.test(nextValue)) return;
+                    setPuzzleValues((previous) => previous.map((entry, currentIndex) => currentIndex === index ? nextValue : entry));
+                    if (event.target.value) puzzleInputsRef.current[index + 1]?.focus();
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Backspace' && !event.currentTarget.value) puzzleInputsRef.current[index - 1]?.focus();
+                  }}
+                />
+                <span className={h.puzzleIcon} aria-hidden="true">{PUZZLE_ICONS[id]}</span>
+              </div>
+            );
+          })}
+          <button
+            className={h.puzzleQuestion}
+            data-solved={puzzleSolved}
+            type="button"
+            aria-label={gameInstructions.title}
+            onClick={() => instructionsDialogRef.current?.showModal()}
+          >
+            <span className={h.questionMark}>?</span>
+            <svg className={h.checkMark} viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m5 17 8 8L27 8" /></svg>
+          </button>
+        </div>
+
+        <dialog
+          ref={hintDialogRef}
+          className={h.hintDialog}
+          aria-labelledby="hero-hint-title"
+          onClick={(event) => { if (event.target === event.currentTarget) hintDialogRef.current?.close(); }}
+        >
+          <button className={h.hintClose} type="button" aria-label={language === 'de' ? 'Schließen' : 'Close'} onClick={() => hintDialogRef.current?.close()}>×</button>
+          <p className={h.hintTitle} id="hero-hint-title">{hintCopy.title}</p>
+          <p className={h.hintClue}>{hintCopy.clue}</p>
+        </dialog>
+
+        <dialog
+          ref={musicDialogRef}
+          className={`${h.hintDialog} ${h.musicDialog}`}
+          aria-labelledby="hero-music-title"
+          onClose={(event) => {
+            const player = event.currentTarget.querySelector('audio');
+            player?.pause();
+            if (player) player.currentTime = 0;
+          }}
+          onClick={(event) => { if (event.target === event.currentTarget) musicDialogRef.current?.close(); }}
+        >
+          <button className={h.hintClose} type="button" aria-label={language === 'de' ? 'Schließen' : 'Close'} onClick={() => musicDialogRef.current?.close()}>×</button>
+          <p className={h.hintTitle} id="hero-music-title">{PLAY_CLUE_COPY[language] || PLAY_CLUE_COPY.en}</p>
+          <audio className={h.cluePlayer} controls preload="none" aria-label={PLAY_CLUE_COPY[language] || PLAY_CLUE_COPY.en}>
+            <source src="/rv/hero/play-clue.mp3" type="audio/mpeg" />
+          </audio>
+        </dialog>
+
+        <dialog
+          ref={instructionsDialogRef}
+          className={`${h.hintDialog} ${h.instructionsDialog}`}
+          aria-labelledby="hero-instructions-title"
+          onClick={(event) => { if (event.target === event.currentTarget) instructionsDialogRef.current?.close(); }}
+        >
+          <button className={h.hintClose} type="button" aria-label={language === 'de' ? 'Schließen' : 'Close'} onClick={() => instructionsDialogRef.current?.close()}>×</button>
+          <p className={h.hintTitle} id="hero-instructions-title">{gameInstructions.title}</p>
+          <ol className={h.instructionList}>
+            {gameInstructions.steps.map((step) => <li key={step}>{step}</li>)}
+          </ol>
+        </dialog>
 
         <div className={h.notes} data-hero-notes="">
           <Note className={h.nCap} lines={notes.cap} />

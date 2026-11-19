@@ -27,32 +27,192 @@
   width: var(--w);
   rotate: var(--r, 0deg);
   pointer-events: auto;
+  cursor: default;
+  touch-action: none;
+  user-select: none;
 }
-.itemIn { transition: translate 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), rotate 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.itemIn img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
-/* No shadows, by request: objects sit flat on the white sheet. */
+.item[data-active-hover='true'] { cursor: grab; }
+.item[data-dragging='true'] { z-index: 8; cursor: grabbing; will-change: translate; }
 @media (hover: hover) and (pointer: fine) {
-  .item:hover .itemIn { translate: 0 -0.5cqw; rotate: -1.5deg; }
-  .item:nth-child(even):hover .itemIn { rotate: 1.5deg; }
+  .item[data-active-hover='true'], .item[data-dragging='true'] { cursor: none; }
+}
+.itemIn { pointer-events: none; }
+.itemIn img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
+.customCursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(27, 26, 24, 0.84);
+  border-radius: 999px;
+  background: #fbfaf5;
+  color: #1b1a18;
+  box-shadow: 0 2px 8px rgba(27, 26, 24, 0.18);
+  pointer-events: none;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 100ms ease, background-color 120ms ease, color 120ms ease;
+}
+.customCursor[data-visible='true'] { opacity: 1; }
+.customCursor svg { display: block; width: 1.3rem; height: 1.3rem; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.customCursor[data-state='moving'] { background: #2536c4; color: white; border-color: #2536c4; }
+@media (hover: hover) and (pointer: fine) { .customCursor { display: flex; } }
+@media (hover: none) and (pointer: coarse) { .customCursor { display: flex; } }
+@media (prefers-reduced-motion: reduce) { .customCursor { transition: none; } }
+/* Active objects get a soft silhouette highlight instead of a focus box. */
+@media (hover: hover) and (pointer: fine) {
+  .item[data-active-hover='true'] .itemIn img { filter: drop-shadow(0 0 5px rgba(37, 54, 196, 0.48)); }
+  .i-earphones[data-active-hover='true'] .itemIn img { filter: drop-shadow(0 0 0.6px rgba(27, 26, 24, 0.55)) drop-shadow(0 0 5px rgba(37, 54, 196, 0.48)); }
+}
+.item[data-dragging='true'] .itemIn img {
+  filter: drop-shadow(0 0 5px rgba(37, 54, 196, 0.48));
 }
 
 /* Placement of the prototype cutouts (already at their final angle). */
 /* White earphones on a white page: a hairline edge keeps them readable (not a cast shadow). */
 .i-earphones img { filter: drop-shadow(0 0 0.6px rgba(27, 26, 24, 0.55)); }
-.i-cap { --x: 8.5%; --y: 17.4%; --w: 17%; }
-.i-notebook { --x: 27.5%; --y: 18.2%; --w: 22.5%; }
-.i-ring { --x: 52.4%; --y: 31.2%; --w: 4.7%; }
-.i-ring-2 { --x: 56.2%; --y: 33.4%; --w: 4.5%; --r: 38deg; }
-.i-earphones { --x: 74%; --y: 18.05%; --w: 25%; --r: 90deg; }
-.i-glasses { --x: 26.5%; --y: 60.3%; --w: 22.75%; }
-.i-blue-pen { --x: 61.75%; --y: 58.5%; --w: 10.75%; }
-.i-black-pen { --x: 67.25%; --y: 56.8%; --w: 10.25%; }
+.i-earphones[data-dragging='true'] .itemIn img {
+  filter: drop-shadow(0 0 0.6px rgba(27, 26, 24, 0.55)) drop-shadow(0 0 5px rgba(37, 54, 196, 0.48));
+}
+.i-cap { --x: 3%; --y: 27%; --w: 17%; }
+.i-cap { z-index: 4; }
+.i-cap[data-shaking='true'] .itemIn { transform-origin: center center; animation: capSettleNudge 650ms ease-in-out both; }
+@keyframes capSettleNudge {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  15% { transform: rotate(-4.5deg) translateY(-3px); }
+  35% { transform: rotate(3.8deg) translateY(1px); }
+  55% { transform: rotate(-2.8deg) translateY(-1px); }
+  75% { transform: rotate(1.7deg) translateY(0); }
+  88% { transform: rotate(-0.7deg) translateY(0); }
+}
+.i-notebook { --x: 29.5%; --y: 16.2%; --w: 19.5%; z-index: 4; }
+.i-ring { --x: 63%; --y: 34%; --w: 4.7%; }
+.i-ring-2 { --x: 68.5%; --y: 36%; --w: 4.5%; --r: 38deg; }
+.i-ring { z-index: 4; }
+.i-ring-2 { z-index: 3; }
+.i-earphones { --x: 77.5%; --y: 22%; --w: 20%; --r: 90deg; }
+.i-glasses { --x: 26.5%; --y: 62.5%; --w: 22.75%; }
+.i-blue-pen { --x: 70%; --y: 60.5%; --w: 10.75%; }
+.i-black-pen { --x: calc(77.8% - 24px); --y: 58.5%; --w: 10.25%; }
+.i-blue-pen { z-index: 4; }
+.i-black-pen { z-index: 3; }
+.capNumber {
+  position: absolute;
+  z-index: 3;
+  left: 11.5%;
+  top: 41%;
+  translate: -50% -50%;
+  color: var(--pen, #2536c4);
+  font: 400 clamp(24px, 2.7cqw, 54px)/1 var(--bodyf, sans-serif);
+  pointer-events: none;
+}
 
 /* ---------- signature ---------- */
 
 .sign { position: absolute; left: 27%; top: 45.4%; width: 44%; color: #1b1a18; }
 .sign svg { display: block; width: 100%; height: auto; overflow: visible; }
 .signIntro { position: absolute; left: 14%; top: 50%; width: 72% !important; translate: 0 -50%; }
+.puzzle {
+  position: absolute;
+  z-index: 9;
+  top: 53.4%;
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(5px, 0.5cqw, 10px);
+  pointer-events: none;
+}
+.puzzleSlot { display: flex; flex-direction: column; align-items: center; gap: clamp(3px, 0.25cqw, 5px); }
+.puzzleInput {
+  box-sizing: border-box;
+  width: clamp(42px, 4.8cqw, 140px);
+  height: clamp(42px, 4.8cqw, 140px);
+  padding: 0;
+  border: 1px solid #a9a8a2;
+  border-radius: clamp(7px, 0.6cqw, 12px);
+  outline: none;
+  background: rgba(255, 255, 255, 0.48);
+  color: #282723;
+  caret-color: #000;
+  pointer-events: auto;
+  font: 500 clamp(16px, 1.35cqw, 27px)/1 var(--bodyf, sans-serif);
+  text-align: center;
+  text-transform: uppercase;
+  transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+.puzzleInput:focus { border-color: #777670; background: #fff; box-shadow: 0 0 0 2px rgba(37, 54, 196, 0.12); }
+.puzzleInput[data-validation='correct'] { border-color: #3b8550; background: #e3f2e6; color: #1f5b31; }
+.puzzleInput[data-validation='misplaced'] { border-color: #c49a26; background: #fff3c5; color: #604b0a; }
+.puzzleInput[data-validation='incorrect'] { border-color: #969590; background: #e9e9e6; color: #4e4d49; }
+.puzzleIcon { display: block; width: clamp(18px, 1.5cqw, 30px); height: clamp(18px, 1.5cqw, 30px); font: normal clamp(15px, 1.35cqw, 27px)/1 sans-serif; text-align: center; }
+.bookHint {
+  position: absolute;
+  z-index: 3;
+  left: 39.25%;
+  top: 28.4%;
+  translate: -50% 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0.1rem 0.2rem;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #56554f;
+  font: 600 clamp(16px, 1.4cqw, 28px)/1.2 var(--bodyf, sans-serif);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.bookHint:hover, .bookHint:focus-visible { color: #2536c4; }
+.bookHint:focus-visible { outline: 2px solid #2536c4; outline-offset: 2px; }
+.bookHint svg { width: 1em; height: 1em; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.hintDialog {
+  position: fixed;
+  inset: 0;
+  width: min(86vw, 360px);
+  margin: auto;
+  padding: 1.6rem 2rem 1.8rem 3.4rem;
+  border: 1px solid var(--rule, #e2e0db);
+  border-radius: 2px;
+  background-color: var(--paper, #fff);
+  background-image:
+    linear-gradient(90deg, transparent 0 27px, rgba(190, 92, 92, 0.18) 27px 28px, transparent 28px),
+    repeating-linear-gradient(to bottom, transparent 0 31px, rgba(63, 91, 145, 0.07) 31px 32px);
+  color: var(--ink, #1b1a18);
+  box-shadow: 0 8px 24px rgba(27, 26, 24, 0.12);
+  pointer-events: auto;
+}
+.hintDialog::backdrop { background: rgba(27, 26, 24, 0.24); }
+.hintClose { position: absolute; top: 0.55rem; right: 0.65rem; width: 2rem; height: 2rem; border: 1px solid var(--rule, #e2e0db); background: var(--paper, #fff); color: var(--ink, #1b1a18); font: 400 1.35rem/1 var(--display, Georgia, serif); cursor: pointer; }
+.hintClose:hover, .hintClose:focus-visible { border-color: var(--pen, #2536c4); color: var(--pen, #2536c4); }
+.hintClose:focus-visible { outline: 2px solid var(--pen, #2536c4); outline-offset: 2px; }
+.hintTitle { margin: 0 0 0.9rem; color: var(--pen, #2536c4); font: 400 1.15rem/1.2 var(--handf, cursive); }
+.hintClue { margin: 0; color: var(--ink, #1b1a18); font: 400 clamp(1.45rem, 5vw, 1.8rem)/1.3 var(--display, Georgia, serif); }
+.cluePlayer { display: block; width: 100%; margin: 0.3rem 0 0; }
+.musicDialog { padding-bottom: 1.5rem; }
+.instructionsDialog { width: min(86vw, 420px); }
+.instructionList { margin: 0; padding-left: 1.2rem; color: var(--ink, #1b1a18); font: 400 1rem/1.55 var(--bodyf, sans-serif); }
+.instructionList li + li { margin-top: 0.55rem; }
+@media (min-width: 761px) {
+  .hintDialog { width: min(86vw, 480px); }
+  .hintClue { font-size: clamp(2rem, 2.8vw, 2.8rem); }
+}
+.puzzleQuestion { display: inline-grid; position: relative; flex: none; width: 1em; height: 1em; margin-left: clamp(5px, 0.5cqw, 10px); padding: 0; place-items: center; appearance: none; border: 0; background: transparent; color: #62615d; cursor: pointer; pointer-events: auto; font: 600 clamp(42px, 4.8cqw, 140px)/1 system-ui, sans-serif; }
+.puzzleQuestion:hover { color: var(--pen, #2536c4); }
+.puzzleQuestion:focus-visible { border-radius: 4px; outline: 2px solid var(--pen, #2536c4); outline-offset: 4px; }
+.questionMark, .checkMark { grid-area: 1 / 1; transition: opacity 220ms ease, transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+.questionMark { opacity: 1; transform: scale(1) rotate(0); }
+.checkMark { width: 1em; height: 1em; overflow: visible; stroke: #3b8550; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 40; stroke-dashoffset: 40; opacity: 0; transform: scale(0.5) rotate(-25deg); transition: opacity 180ms ease, transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1), stroke-dashoffset 420ms ease; }
+.puzzleQuestion[data-solved='true'] .questionMark { opacity: 0; transform: scale(0.35) rotate(90deg); }
+.puzzleQuestion[data-solved='true'] .checkMark { opacity: 1; stroke-dashoffset: 0; transform: scale(1) rotate(0); }
 
 /* ---------- notes and doodles ---------- */
 
@@ -75,36 +235,36 @@
 
 .doodle { position: absolute; left: var(--x); top: var(--y); width: var(--w); height: auto; overflow: visible; }
 
-.nCap { --x: 8.5%; --y: 10.5%; --r: -5deg; }
-.aCap { --x: 29.5%; --y: 14.6%; --w: 2.9%; transform: scaleX(-1) rotate(18deg); }
-.sparksCap { --x: 4.6%; --y: 15.2%; --w: 3.1%; transform: rotate(-70deg); }
+.nCap { --x: 12.1%; --y: 11.6%; --r: -5deg; text-transform: none; }
+.aCap { --x: 12.9%; --y: 23.4%; --w: 3.2%; transform: scaleX(-1) rotate(18deg); }
+.sparksCap { --x: 0.5%; --y: 21.5%; --w: 3.1%; transform: rotate(-70deg); }
 
-.nWord { --x: 46.5%; --y: 9.2%; --r: -5deg; }
-.aWord { --x: 42.3%; --y: 14%; --w: 2.9%; transform: scaleX(-1) rotate(20deg); }
+.nWord { --x: 51.6%; --y: 6.2%; --r: -5deg; }
+.aWord { --x: 47.1%; --y: 13.2%; --w: 2.9%; transform: scaleX(-1) rotate(20deg); }
 
-.nRing { --x: 50.8%; --y: 18.2%; --r: -6deg; padding: 0.7cqw 1.4cqw; }
+.nRing { --x: 59.7%; --y: 20.4%; --r: -6deg; padding: 0.7cqw 1.4cqw; }
 .ringLoop { position: absolute; inset: -8% -4%; width: 108%; height: 116%; overflow: visible; }
-.aRing { --x: 54.5%; --y: 26.7%; --w: 1.7%; transform: rotate(6deg); }
-.sparksRing { --x: 49.8%; --y: 32%; --w: 1.8%; transform: rotate(-95deg); }
+.aRing { --x: 67.1%; --y: 29.8%; --w: 1.7%; transform: rotate(6deg); }
+.sparksRing { --x: 60.2%; --y: 36.2%; --w: 1.8%; transform: rotate(-95deg); }
 
-.nMusic { --x: 77%; --y: 9.2%; --r: -8deg; }
-.aMusic { --x: 72%; --y: 16%; --w: 4.4%; transform: scaleX(-1) rotate(-4deg); }
-.flower { --x: 94.2%; --y: 48%; --w: 4.8%; }
+.nMusic { --x: 87.3%; --y: 7.2%; --r: -8deg; }
+.aMusic { --x: 82.8%; --y: 19.4%; --w: 4.4%; transform: scaleX(-1) rotate(-4deg); }
+.flower { --x: 100%; --y: 48%; --w: 4.8%; }
 
-.nSee { --x: 8.5%; --y: 67.4%; --r: -4deg; }
-.aSee { --x: 22.3%; --y: 72.2%; --w: 3.5%; transform: rotate(-58deg); }
+.nSee { --x: 12.1%; --y: 62.7%; --r: -4deg; }
+.aSee { --x: 23.2%; --y: 73.6%; --w: 3.5%; transform: rotate(-58deg); }
 
-.nPens { --x: 85.2%; --y: 61.4%; --r: -7deg; line-height: 1.5; }
-.aPens { --x: 78.8%; --y: 66.5%; --w: 4.8%; transform: scaleX(-1) rotate(-52deg); }
+.nPens { --x: 92.5%; --y: 61.7%; --r: -7deg; line-height: 1.5; }
+.aPens { --x: 82.8%; --y: 71.8%; --w: 4.8%; transform: scaleX(-1) rotate(-52deg); }
 
-.nPlace { --x: 28.6%; --y: 83%; --r: -2deg; display: flex; align-items: center; gap: 1cqw; }
+.nPlace { --x: 5%; --y: 91%; --r: -2deg; display: flex; align-items: center; gap: 1cqw; }
 .pin { width: 1.5cqw; height: auto; overflow: visible; flex: none; }
 .pin path { stroke-width: 2; }
 
-.starA { --x: 61%; --y: 42.5%; --w: 2.1%; }
-.starB { --x: 8%; --y: 56%; --w: 2.1%; transform: rotate(20deg); }
-.cherries { --x: 52.2%; --y: 73.6%; --w: 5%; }
-.hatch { --x: 76.5%; --y: 78.2%; --w: 1.9%; }
+.starA { --x: 79.5%; --y: 52.3%; --w: 2.1%; }
+.starB { --x: 1.3%; --y: 55.9%; --w: 2.1%; transform: rotate(20deg); }
+.cherries { --x: 96%; --y: 52%; --w: 5%; }
+.hatch { --x: 81%; --y: 81%; --w: 1.9%; }
 
 /* ---------- phones and portrait tablets: recomposed, not shrunk ----------
    Smaller objects with more air between them, and only the notes that fit. */
@@ -112,39 +272,49 @@
 @media (max-width: 760px), (orientation: portrait) and (max-width: 1100px) {
   .box { width: min(100vw, 100svh * 0.54); height: 100svh; aspect-ratio: auto; }
 
-  .i-cap { --x: 10%; --y: 12.5%; --w: 29%; --r: -4deg; }
-  .i-notebook { --x: 53%; --y: 15.5%; --w: 37%; }
-  .i-ring { --x: 46.5%; --y: 34.2%; --w: 7%; }
+  .i-cap { --x: 2.5%; --y: 10.5%; --w: 27%; --r: -4deg; }
+  .i-notebook { --x: 57%; --y: 12.5%; --w: 35%; }
+  .i-ring { --x: 45%; --y: 34.2%; --w: 7%; }
   .i-ring-2 { --x: 53.5%; --y: 35.6%; --w: 6.6%; }
-  .i-earphones { --x: 62.5%; --y: 30.5%; --w: 34%; --r: 90deg; }
-  .i-glasses { --x: 8%; --y: 62.5%; --w: 43%; }
-  .i-blue-pen { --x: 65%; --y: 60.5%; --w: 13.5%; }
-  .i-black-pen { --x: 74.5%; --y: 59.5%; --w: 13%; }
+  .i-earphones { --x: 67.5%; --y: 30.5%; --w: 31%; --r: 90deg; }
+  .i-glasses { --x: 4%; --y: 64.5%; --w: 43%; }
+  .i-blue-pen { --x: 68.5%; --y: 63%; --w: 13.5%; }
+  .i-black-pen { --x: 83.5%; --y: 61.5%; --w: 13%; }
+  .capNumber { left: 16%; top: 19.2%; font-size: clamp(22px, 6cqw, 30px); }
 
   .sign { left: 6%; top: 48.5%; width: 88%; }
   .sign path { stroke-width: 6.5; }
   .signIntro { left: 6%; width: 88% !important; }
   .signIntro path { stroke-width: 3.8; }
+  .puzzle { top: 54.8%; left: 50%; gap: clamp(4px, 1.2cqw, 7px); }
+  .puzzleSlot { gap: 4px; }
+  .puzzleInput { width: clamp(40px, 9.5cqw, 56px); height: clamp(40px, 9.5cqw, 56px); border-radius: 7px; font-size: clamp(18px, 4cqw, 22px); }
+  .puzzleIcon { width: clamp(15px, 3.5cqw, 19px); height: clamp(15px, 3.5cqw, 19px); font-size: clamp(14px, 3.2cqw, 18px); }
+  .puzzleQuestion { width: 1em; height: 1em; margin-left: clamp(4px, 1cqw, 6px); padding-top: 0; font-size: clamp(40px, 9.5cqw, 56px); }
+  .bookHint { left: 74.5%; top: 20.5%; font-size: clamp(16px, 4.2cqw, 20px); }
 
   .note { font-size: 4.6cqw; }
   .noteUnderline { height: 1.8cqw; margin-top: 0.8cqw; }
   .note path, .doodle path { stroke-width: 1.9; }
 
-  .nCap { --x: calc(8% - 20px); --y: 35.5%; --r: -5deg; width: max-content; }
+  .nCap { --x: 3%; --y: 31.5%; --r: -5deg; width: max-content; }
   .nCap .noteUnderline { width: 45%; margin-left: auto; margin-right: auto; transform: translateX(-30px); }
   .sparksCap { --x: 5%; --y: 10.5%; --w: 6%; }
   .nWord { --x: 65%; --y: 6.5%; --r: -5deg; }
-  .aWord { --x: 60%; --y: 16.5%; --w: 5%; }
-  .nSee { --x: 9%; --y: 75.5%; }
-  .nPlace { --x: 9%; --y: 84.5%; gap: 2.2cqw; }
+  .aWord { --x: 61%; --y: 12.2%; --w: 5%; }
+  .aRing { --x: 54.5%; --y: 33.5%; --w: 3%; }
+  .nRing { display: block; --x: 33%; --y: 28.5%; --r: -6deg; }
+  .nSee { --x: 6%; --y: 77%; }
+  .nPlace { --x: 5%; --y: 90%; gap: 2.2cqw; }
   .pin { width: 3.2cqw; }
-  .starA { --x: 47%; --y: 60%; --w: 4.5%; }
+  .starA { display: none; }
 
   .aCap, .aSee, .nPens, .aPens, .starB,
-  .nRing, .aRing, .sparksRing, .nMusic, .aMusic, .flower, .cherries, .hatch { display: none; }
+  .sparksRing, .nMusic, .aMusic, .flower, .cherries, .hatch { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .layer { position: relative; height: 100svh; }
   .signIntro { display: none; }
+  .questionMark, .checkMark { transition: none; }
 }

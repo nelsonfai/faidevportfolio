@@ -115,9 +115,36 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
           const heroBox = one('[data-hero-box]');
           const heroItems = q('[data-hero-item]');
           const heroNotes = one('[data-hero-notes]');
+          const heroPuzzle = one('[data-hero-puzzle]');
+          const capNumber = one('[data-hero-cap-number]');
+          const bookHint = one('[data-hero-hint]');
+          const capItem = heroItems.find((item) => item.dataset.heroItem === 'cap');
+          let capLandsAt = Infinity;
+          let capShakeInterval = null;
+          let capShakeTimeout = null;
           const strokeTime = (el, speed) => Math.max(0.1, el.getTotalLength() / speed);
 
+          const shakeCap = () => {
+            if (!capItem || capItem.dataset.dragging === 'true') return;
+            const bounds = capItem.getBoundingClientRect();
+            if (bounds.bottom < 0 || bounds.top > window.innerHeight) {
+              stopCapShakes();
+              return;
+            }
+            capItem.dataset.shaking = 'true';
+            window.clearTimeout(capShakeTimeout);
+            capShakeTimeout = window.setTimeout(() => { delete capItem.dataset.shaking; }, 650);
+          };
+          const stopCapShakes = () => {
+            window.clearInterval(capShakeInterval);
+            window.clearTimeout(capShakeTimeout);
+            capShakeInterval = null;
+            capShakeTimeout = null;
+            if (capItem) delete capItem.dataset.shaking;
+          };
+
           gsap.set(q('[data-draw], [data-sign-a], [data-sign-b]'), { strokeDasharray: 1, strokeDashoffset: 1 });
+          gsap.set([heroPuzzle, capNumber, bookHint], { autoAlpha: 0 });
 
           // 0. First view, once on load: only "i am Fai" writes itself.
           gsap.to(q('[data-sign-a]'), { strokeDashoffset: 0, duration: (i, el) => strokeTime(el, 900), stagger: 0.22, delay: 0.35, ease: 'power1.inOut' });
@@ -137,7 +164,17 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
           // The hero assembles as the page scrolls, then leads into the About section.
           const tl = gsap.timeline({
             defaults: { ease: 'none' },
-            scrollTrigger: { trigger: one('[data-pin]'), start: 'top top', end: 'bottom bottom', scrub: 0.6, invalidateOnRefresh: true },
+            scrollTrigger: {
+              trigger: one('[data-pin]'), start: 'top top', end: 'bottom bottom', scrub: 0.6, invalidateOnRefresh: true,
+              onUpdate: (trigger) => {
+                const settled = trigger.animation.time() >= capLandsAt;
+                if (settled && capShakeInterval === null) {
+                  shakeCap();
+                  capShakeInterval = window.setInterval(shakeCap, 6000);
+                }
+                else if (!settled && capShakeInterval !== null) stopCapShakes();
+              },
+            },
           });
 
           // A
@@ -150,7 +187,17 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
             pen += duration * 0.92;
           });
           heroItems.forEach((item, index) => {
-            tl.fromTo(item, { x: () => away(item, 'x'), y: () => away(item, 'y'), rotation: spin(index) }, { x: 0, y: 0, rotation: 0, duration: 2.2 + (index % 3) * 0.35, ease: 'power2.out', immediateRender: true }, 0.5 + (index % 4) * 0.15);
+            const start = 0.5 + (index % 4) * 0.15;
+            const duration = 2.2 + (index % 3) * 0.35;
+            tl.fromTo(item, { x: () => away(item, 'x'), y: () => away(item, 'y'), rotation: spin(index) }, { x: 0, y: 0, rotation: 0, duration, ease: 'power2.out', immediateRender: true }, start);
+            if (item.dataset.heroItem === 'cap') {
+              capLandsAt = start + duration;
+              tl.to(capNumber, { autoAlpha: 1, duration: 0.15, ease: 'power1.out' }, capLandsAt);
+              tl.fromTo(heroPuzzle, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3, ease: 'power1.out', immediateRender: true }, capLandsAt + 0.1);
+            }
+            if (item.dataset.heroItem === 'notebook') {
+              tl.to(bookHint, { autoAlpha: 1, duration: 0.15, ease: 'power1.out' }, start + duration);
+            }
           });
           // The whole note layer stays hidden until its moment, so nothing (not even
           // the round caps of undrawn strokes) shows in the quiet first view.
@@ -200,6 +247,7 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
 
           // Pointer tilt on framed media, hover devices only.
           const cleanups = [];
+          cleanups.push(stopCapShakes);
           if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
             q('[data-tilt]').forEach((frame) => {
               const rx = gsap.quickTo(frame, 'rotationX', { duration: 0.5, ease: 'power2.out' });
