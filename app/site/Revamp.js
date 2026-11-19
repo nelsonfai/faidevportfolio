@@ -10,7 +10,26 @@ import { Mark } from './Marks';
 import { Browser } from './Demos';
 import ClippyStage from './ClippyStage';
 import Hero from './Hero';
+import { supportsNextImageOptimization } from './imageSources';
 import s from './site.module.css';
+
+const ABOUT_ICONS = {
+  programming: { paths: ['M8 7 3 12l5 5', 'm16 7 5 5-5 5', 'm14 5-4 14'] },
+  art: { paths: ['M12 3a9 9 0 1 0 0 18h1.2a2 2 0 0 0 1.2-3.6 1.8 1.8 0 0 1 1.1-3.2H18a3 3 0 0 0 3-3c0-4.5-4-8.2-9-8.2Z'], dots: [[7.5, 10], [11, 7.5], [15, 8.5], [7.5, 14.5]] },
+  music: { paths: ['M10 18V5l11-2v13', 'M10 8l11-2'], dots: [[7, 18], [18, 16]], filled: true },
+  electronics: { paths: ['M8 7h8a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z', 'M10 3v4m4-4v4m4-1h3m-3 4h3m-3 4h3m-3 4h3M10 17v4m4-4v4m-7-14H4m3 4H4m3 4H4m3 4H4'] },
+  writing: { paths: ['m4 20 4.2-.9L19 8.3a2.1 2.1 0 0 0-3-3L5.2 16.1 4 20Z', 'm14.5 6.5 3 3'] },
+};
+
+function AboutPointIcon({ type }) {
+  const icon = ABOUT_ICONS[type];
+  return (
+    <svg className={s.aboutPointIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      {icon.paths.map((d) => <path key={d} d={d} />)}
+      {icon.dots?.map(([cx, cy]) => <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="1.15" fill={icon.filled ? 'currentColor' : 'none'} />)}
+    </svg>
+  );
+}
 
 // Each project is a scene: a large title, one framed view of the product and a
 // short note beside it. Two alternating compositions keep the rhythm even;
@@ -21,7 +40,7 @@ function ProjectView({ project, language, t }) {
   const still = media && (media.type === 'animated'
     // Animated formats bypass the image optimizer so every frame is preserved.
     ? <img src={media.src} alt={project.title} width={media.w} height={media.h} loading="lazy" decoding="async" />
-    : <Image src={media.src} alt={project.title} width={media.w} height={media.h} sizes="(max-width: 760px) 92vw, 62vw" />);
+    : <Image src={media.src} alt={project.title} width={media.w} height={media.h} sizes="(max-width: 760px) 92vw, min(62vw, 900px)" />);
 
   if (project.view === 'clippy') return <ClippyStage language={language} hint={t.clippyHint} shakeHint={t.clippyShake} />;
   // The Beta Health animation already shows the app inside a phone, so it gets no extra frame.
@@ -240,11 +259,11 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
           <p className={s.aboutBody}>{t.aboutBody}</p>
           <Mark type="doubleUnderline" className={s.aboutBodyMark} group="scroll" />
         </div>
-        {/* Same numbering device as the project scenes: pen index, serif label, thin rule. */}
+        {/* Icon row for the interests that connect the About section. */}
         <ol className={s.aboutSummary}>
           {t.aboutPoints.map((point, index) => (
             <li className={s.aboutPoint} key={point} data-rise="">
-              <span className={`${s.hand} ${s.aboutPointIndex}`}>{String(index + 1).padStart(2, '0')}</span>
+              <AboutPointIcon type={Object.keys(ABOUT_ICONS)[index]} />
               <span>{point}</span>
             </li>
           ))}
@@ -271,7 +290,11 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
           {articles.map((article, index) => (
             <li key={article.slug} className={s.row} data-row="">
               <Link href={`${t.home}/writing/${article.slug}`} className={s.rowLink}>
-                <span className={s.rowImage}><img src={article.image || '/images/apjot-home.png'} alt="" width="480" height="360" loading="lazy" /></span>
+                <span className={s.rowImage}>
+                  {supportsNextImageOptimization(article.image || '/images/apjot-home.png')
+                    ? <Image src={article.image || '/images/apjot-home.png'} alt="" fill sizes="(max-width: 760px) 30vw, min(28vw, 380px)" />
+                    : <img src={article.image} alt="" loading="lazy" decoding="async" />}
+                </span>
                 <span className={`${s.hand} ${s.rowIndex}`}>{String(index + 1).padStart(2, '0')}</span>
                 <span className={s.rowMain}>
                   <span className={s.rowTitle}>{article.title}</span>
@@ -291,29 +314,31 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
       </section>
 
       <section className={s.contact} id="contact">
-        <h2 className={s.contactTitle} data-rise="">{t.contactTitle}</h2>
         <div className={s.contactFeature} data-rise="">
           <Mark type="sparks" className={`${s.contactDoodle} ${s.contactSpark}`} group="scroll" />
           <span className={`${s.hand} ${s.contactS}`}>S</span>
-          <Image className={s.contactGlasses} src={heroAssets?.glasses?.src ?? '/rv/hero/prototype/glasses.webp'} alt={language === 'de' ? 'Brille' : 'Glasses'} width={heroAssets?.glasses?.w ?? 509} height={heroAssets?.glasses?.h ?? 268} sizes="(max-width: 760px) 52vw, 40vw" />
+          <Image className={s.contactGlasses} src="/rv/hero/glasses-contact.webp" alt={language === 'de' ? 'Brille' : 'Glasses'} width={1728} height={910} quality={90} sizes="(max-width: 760px) 50vw, min(39vw, 650px)" />
           <span className={`${s.hand} ${s.contactYou}`}>you!</span>
         </div>
-        <p className={`${s.hand} ${s.contactPrompt}`} data-rise="">{t.contactPrompt}</p>
-        <div className={s.contactCloser}>
+        <p className={`${s.hand} ${s.contactPrompt}`} data-rise="">
+          {t.contactPrompt} {t.contactCloser}
           <Mark type="flower" className={`${s.contactDoodle} ${s.contactFlower}`} group="scroll" />
-          <p>{t.contactCloser}</p>
           <Mark type="doubleUnderline" className={`${s.contactDoodle} ${s.contactCloserUnderline}`} group="scroll" />
           <Mark type="cherries" className={`${s.contactDoodle} ${s.contactCherries}`} group="scroll" />
-        </div>
-        <p className={s.contactMail}>
-          <a href={`mailto:${contact.email}`}>{contact.email}</a>
         </p>
-        <p className={s.contactLinks}>
-          <a className={s.link} href={contact.github} target="_blank" rel="noreferrer">GitHub</a>
-          <a className={s.link} href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-          <a className={s.link} href={contact.apjot} target="_blank" rel="noreferrer">Apjot</a>
-        </p>
-        <p className={s.footer}>{t.footer} · {new Date().getFullYear()}</p>
+        <section className={s.todoNote} aria-labelledby="todo-title">
+          <h3 className={s.todoTitle} id="todo-title">{t.todoTitle}</h3>
+          <ul className={s.todoList}>
+            {t.todoItems.map((item) => (
+              <li className={s.todoItem} key={item}>
+                <label>
+                  <input type="checkbox" />
+                  <span>{item}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </section>
       </section>
     </main>
   );

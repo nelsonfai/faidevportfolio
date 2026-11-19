@@ -2,7 +2,7 @@ import Link from 'next/link';
 import s from './siteHeader.module.css';
 
 const labels = {
-  en: { works: 'works', writing: 'writing', about: 'about', contact: 'contact', language: 'DE', navLabel: 'Primary navigation' },
+  en: { works: 'works', writing: 'writings', about: 'about', contact: 'contact', language: 'DE', navLabel: 'Primary navigation' },
   de: { works: 'projekte', writing: 'texte', about: 'über mich', contact: 'kontakt', language: 'EN', navLabel: 'Hauptnavigation' },
 };
 

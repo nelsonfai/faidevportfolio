@@ -193,7 +193,7 @@ export default function ClippyStage({ language = 'en', hint, shakeHint, trigger,
         <button type="button" className={s.clippyHost} ref={hostRef} onClick={interactive ? () => apiRef.current?.play('happy') : undefined} aria-label="Clippy" tabIndex={interactive ? 0 : -1}>
           {status !== 'ready' && (
             // Static fallback until (or unless) the live sprite is running.
-            <img className={s.clippyFallback} src="/rv/clippy-waving-high.png" alt="" width="1254" height="1254" loading="lazy" />
+            <img className={s.clippyFallback} src="/rv/clippy-waving-high.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async" />
           )}
         </button>
         <span className={s.clippySays} aria-live="polite" data-on={bubble ? 'true' : 'false'}>{bubble || ' '}</span>

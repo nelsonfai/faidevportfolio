@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ClippyStage from './ClippyStage';
-import { contact } from './content';
 import { fontVars } from './fonts';
 import SiteHeader from './SiteHeader';
 import s from './clippyDetails.module.css';
@@ -12,7 +11,7 @@ import s from './clippyDetails.module.css';
 const text = {
   en: {
     home: '/',
-    back: 'Selected works', navContact: 'Contact', status: 'Personal project',
+    back: 'Selected works', status: 'Personal project',
     projectAim: 'Exploring agentic workflows and AI tool calling. The goal: at least the breadth of Grok Bot, specialized for personal needs and use cases, on a budget.',
     intro: 'A personal AI companion that lives on your desktop.', prompt: 'Say hello. He is already here.',
     behaviorsTitle: 'More than a mascot', behaviorsIntro: 'Clippy’s behavior engine turns app events and context into a considered response. Try a few situations.',
@@ -56,11 +55,10 @@ const text = {
     makingCaptions: ['Character directions', 'Expressions and poses', 'The desktop character'],
     nextTitle: 'What’s next', nextIntro: 'Clippy is still in development. The next work is about making the useful parts feel more natural, while keeping awareness and actions under clear user control.',
     nextItems: ['More natural voice interaction', 'More capable specialist agents', 'Careful, opt-in desktop awareness'],
-    github: 'Explore selected work', footer: 'Designed and built by Nelson Fai',
   },
   de: {
     home: '/de',
-    back: 'Ausgewählte Arbeiten', navContact: 'Kontakt', status: 'Persönliches Projekt',
+    back: 'Ausgewählte Arbeiten', status: 'Persönliches Projekt',
     projectAim: 'Ein Projekt, um agentische Workflows und den Aufruf von KI-Tools zu erkunden. Das Ziel: mindestens die Funktionsbreite eines Grok Bots, zugeschnitten auf persönliche Bedürfnisse und Anwendungsfälle – mit kleinem Budget.',
     intro: 'Ein persönlicher KI-Begleiter auf deinem Desktop.', prompt: 'Sag hallo. Er ist schon da.',
     behaviorsTitle: 'Mehr als ein Maskottchen', behaviorsIntro: 'Clippys Verhaltens-Engine leitet aus App-Ereignissen und Kontext passende Reaktionen ab. Probiere ein paar Situationen aus.',
@@ -104,7 +102,6 @@ const text = {
     makingCaptions: ['Figurenrichtungen', 'Ausdrücke und Posen', 'Die Desktop-Figur'],
     nextTitle: 'Wie es weitergeht', nextIntro: 'Clippy ist noch in der Entwicklung. Als Nächstes sollen sich die nützlichen Funktionen natürlicher anfühlen, während Wahrnehmung und Aktionen klar unter deiner Kontrolle bleiben.',
     nextItems: ['Natürlichere Sprachinteraktion', 'Leistungsfähigere Spezialagenten', 'Desktop-Wahrnehmung nur nach deiner Zustimmung'],
-    github: 'Ausgewählte Arbeiten', footer: 'Gestaltet und entwickelt von Nelson Fai',
   },
 };
 
@@ -244,8 +241,10 @@ export default function ClippyDetails({ language = 'en' }) {
           </div>
           <aside className={s.tracePanel}>
             <ClippyStage language={language} large controls={false} interactive={false} trigger={signal} />
-            <p className={s.panelLabel}>{t.trace}</p>
-            {trace ? <><code>{trace.event}</code><strong>{trace.decision}</strong><span>{language === 'de' ? 'Szene' : 'Scene'}: {animationLabels[language][trace.animation] || trace.animation}</span></> : <p>{t.traceEmpty}</p>}
+            <div className={s.traceCopy}>
+              <p className={s.panelLabel}>{t.trace}</p>
+              {trace ? <><code>{trace.event}</code><strong>{trace.decision}</strong><span>{language === 'de' ? 'Szene' : 'Scene'}: {animationLabels[language][trace.animation] || trace.animation}</span></> : <p>{t.traceEmpty}</p>}
+            </div>
           </aside>
         </div>
       </section>
@@ -359,12 +358,6 @@ export default function ClippyDetails({ language = 'en' }) {
         <Link href={`${t.home}#works`} className={s.backLink}>← {t.back}</Link>
       </section>
 
-      <footer className={s.footer} id="contact">
-        <p className={`${s.hand} ${s.sectionKicker}`}>{t.navContact}</p>
-        <a className={s.footerEmail} href={`mailto:${contact.email}`}>{contact.email}</a>
-        <div><a href={contact.github} target="_blank" rel="noreferrer">GitHub →</a><a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn →</a></div>
-        <p>{t.footer} · {new Date().getFullYear()}</p>
-      </footer>
     </main>
   );
 }

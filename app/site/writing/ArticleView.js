@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import MermaidDiagram from '../../components/MermaidDiagram';
 import { getWritingItem } from '../../writing-data';
+import { supportsNextImageOptimization } from '../imageSources';
 import { formatDate } from '../articles';
 import { fontVars } from '../fonts';
 import { Mark } from '../Marks';
@@ -43,7 +45,9 @@ export default async function ArticleView({ slug, language = 'en' }) {
           <p className={`${s.hand} ${s.articleMeta}`} lang={language}>{[project ? project.role : article.author || 'Nelson Fai', date, t.bodyNote].filter(Boolean).join(' · ')}</p>
           {article.image && (
             <figure className={s.articleCover}>
-              <img src={article.image} alt="" />
+              {supportsNextImageOptimization(article.image)
+                ? <Image src={article.image} alt="" width={1600} height={1000} sizes="(max-width: 760px) 92vw, min(72vw, 900px)" />
+                : <img src={article.image} alt="" loading="lazy" decoding="async" />}
             </figure>
           )}
           {project ? (
