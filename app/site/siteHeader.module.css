@@ -1,3 +1,17 @@
+.skipLink {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  translate: 0 -160%;
+  padding: 8px 14px;
+  border: 1px solid var(--ink, #1b1a18);
+  background: var(--paper, #fff);
+  color: var(--ink, #1b1a18);
+  font: 400 1rem/1.4 var(--sans, Arial, sans-serif);
+}
+.skipLink:focus { translate: 0 0; outline: 3px solid var(--pen, #2536c4); outline-offset: 3px; }
+
 .header {
   position: fixed;
   inset: 0 0 auto;

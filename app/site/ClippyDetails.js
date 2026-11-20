@@ -172,7 +172,7 @@ export default function ClippyDetails({ language = 'en' }) {
       <section className={s.hero}>
         <div className={s.heroCopy}>
           <span className={s.projectTag}>{t.status}</span>
-          <h1>Clippy</h1>
+          <h1 id="clippy-title" tabIndex={-1}>Clippy</h1>
           <p className={s.heroIntro}>{t.intro}</p>
           <p className={s.projectAim}>{t.projectAim}</p>
           <p className={`${s.hand} ${s.heroPrompt}`}>{t.prompt}</p>

@@ -37,7 +37,7 @@ export default async function ArticleView({ slug, language = 'en' }) {
       <div className={s.articlePage}>
         <article className={s.article} lang="en">
           <p className={s.articleKicker} lang={language}>{project ? `${project.title} · ${t.caseStudy}` : t.essay}</p>
-          <h1 className={s.articleTitle}>
+          <h1 className={s.articleTitle} id="article-title" tabIndex={-1}>
             {project ? project.title : article.title}
             <Mark type="underline" className={s.articleUnderline} />
           </h1>

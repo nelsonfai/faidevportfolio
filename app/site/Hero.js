@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Mark } from './Marks';
 import h from './hero.module.css';
@@ -340,14 +342,15 @@ export default function Hero({ language = 'en', assets }) {
           <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18M12 3 9 6m3-3 3 3M21 12l-3-3m3 3-3 3M12 21l-3-3m3 3 3-3M3 12l3-3m-3 3 3 3" /></svg>
         </div>
 
-        <div className={h.sign} data-hero-sign="">
-          <svg className={h.signMain} viewBox="0 0 1220 165" fill="none" role="img" aria-label="the making of Fai" {...fit}>
+        <h1 className={h.sign} id="site-title" tabIndex={-1} data-hero-sign="">
+          <span className={h.srOnly}>The making of Fai</span>
+          <svg className={h.signMain} viewBox="0 0 1220 165" fill="none" aria-hidden="true" {...fit}>
             {SIGNATURE.map((d) => <path key={d} d={d} pathLength="1" data-sign-b="" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />)}
           </svg>
-          <svg className={h.signIntro} data-sign-intro="" viewBox="0 0 790 160" fill="none" role="img" aria-label="i am Fai" {...fit}>
+          <svg className={h.signIntro} data-sign-intro="" viewBox="0 0 790 160" fill="none" aria-hidden="true" {...fit}>
             {SIGNATURE_INTRO.map((d) => <path key={d} d={d} pathLength="1" data-sign-a="" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />)}
           </svg>
-        </div>
+        </h1>
 
         <div className={h.puzzle} data-hero-puzzle="" role="group" aria-label={language === 'de' ? 'Zahlenrätsel' : 'Number puzzle'}>
           {PUZZLE_ITEMS.map((id, index) => {
