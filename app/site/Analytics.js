@@ -15,10 +15,12 @@ export default function Analytics() {
 
     function trackChecklistChange(event) {
       const input = event.target;
-      if (!(input instanceof HTMLInputElement) || !input.dataset.checklistItem) return;
+      if (!(input instanceof HTMLInputElement)) return;
+      const item = input.dataset.checklistItem;
+      if (!item) return;
 
-      window.umami?.track('checklist_toggle', {
-        item: input.dataset.checklistItem,
+      window.umami?.track(`checklist_${item}`, {
+        item,
         checked: input.checked,
         language: input.closest('[lang]')?.lang,
       });
