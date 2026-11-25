@@ -1,5 +1,15 @@
 // English and German copy and project data for the portfolio.
 
+export const checklist = [
+  { id: 'found_clues', en: 'I found all the hidden clues', de: 'Ich habe alle versteckten Hinweise gefunden' },
+  { id: 'solved_puzzle', en: 'I solved the puzzle', de: 'Ich habe das Rätsel gelöst' },
+  { id: 'got_to_know_fai', en: 'I got to know Fai a little better', de: 'Ich habe Fai ein wenig besser kennengelernt' },
+  { id: 'explored_projects', en: 'I explored his projects', de: 'Ich habe seine Projekte erkundet' },
+  { id: 'had_fun', en: 'I had fun exploring', de: 'Ich hatte Spaß beim Erkunden' },
+  { id: 'want_more', en: "I'd love to see more", de: 'Ich würde gern mehr sehen' },
+  { id: 'say_hello', en: 'I should probably say hello', de: 'Ich sollte wohl Hallo sagen' },
+];
+
 export const copy = {
   en: {
     home: '',
@@ -27,15 +37,6 @@ export const copy = {
     contactPrompt: 'Feel free to reach out with ideas, projects, collaborations, or just to say hello.',
     contactCloser: 'Open to collaborations, thoughtful ideas, and interesting projects.',
     todoTitle: 'Signing off:',
-    todoItems: [
-      'I found all the hidden clues',
-      'I solved the puzzle',
-      'I got to know Fai a little better',
-      'I explored his projects',
-      'I had fun exploring',
-      "I'd love to see more",
-      'I should probably say hello',
-    ],
     footer: 'Designed and built by Nelson Fai',
     back: 'Back',
     article: 'Article',
@@ -67,15 +68,6 @@ export const copy = {
     contactPrompt: 'Melde dich gern mit Ideen, Projekten, Kooperationen oder einfach, um Hallo zu sagen.',
     contactCloser: 'Offen für Kooperationen, gute Ideen und spannende Projekte.',
     todoTitle: 'Zum Abschied:',
-    todoItems: [
-      'Ich habe alle versteckten Hinweise gefunden',
-      'Ich habe das Rätsel gelöst',
-      'Ich habe Fai ein wenig besser kennengelernt',
-      'Ich habe seine Projekte erkundet',
-      'Ich hatte Spaß beim Erkunden',
-      'Ich würde gern mehr sehen',
-      'Ich sollte wohl Hallo sagen',
-    ],
     footer: 'Gestaltet und entwickelt von Nelson Fai',
     back: 'Zurück',
     article: 'Artikel',

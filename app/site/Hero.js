@@ -302,6 +302,7 @@ export default function Hero({ language = 'en', assets }) {
     }
 
     const controller = new AbortController();
+    let outcome = 'error';
     fetch('/api/puzzle/validate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -311,19 +312,26 @@ export default function Hero({ language = 'en', assets }) {
       .then((response) => (response.ok ? response.json() : Promise.reject(new Error('Validation failed'))))
       .then(({ statuses, solved }) => {
         if (Array.isArray(statuses) && statuses.length === PUZZLE_ITEMS.length) {
+          outcome = solved ? 'solved' : 'incorrect';
           setPuzzleStatuses(statuses);
           setPuzzleSolved(Boolean(solved));
         }
       })
       .catch((error) => {
-        if (error.name !== 'AbortError') {
-          setPuzzleStatuses(PUZZLE_ITEMS.map(() => ''));
-          setPuzzleSolved(false);
+        if (error.name === 'AbortError') {
+          outcome = 'cancelled';
+          return;
         }
+
+        setPuzzleStatuses(PUZZLE_ITEMS.map(() => ''));
+        setPuzzleSolved(false);
+      })
+      .finally(() => {
+        window.umami?.track('puzzle_submission_attempt', { outcome, language });
       });
 
     return () => controller.abort();
-  }, [puzzleComplete, puzzleValues]);
+  }, [puzzleComplete, puzzleValues, language]);
 
   return (
     <div className={h.layer} data-hero="">
@@ -333,7 +341,7 @@ export default function Hero({ language = 'en', assets }) {
           return <DraggableItem key={item.id} item={item} asset={asset} language={language} index={index} cursorRef={cursorRef} onEarphonesMoved={openMusicClue} />;
         })}
         <span className={h.capNumber} data-hero-cap-number="" aria-hidden="true">8</span>
-        <button className={h.bookHint} data-hero-hint="" type="button" onClick={() => hintDialogRef.current?.showModal()} aria-haspopup="dialog">
+        <button className={h.bookHint} data-hero-hint="" type="button" data-analytics-click="puzzle_hint" onClick={() => hintDialogRef.current?.showModal()} aria-haspopup="dialog">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18h6m-5 3h4m-2-19a7 7 0 0 0-4 12.7c.6.4 1 1 1 1.8h6c0-.8.4-1.4 1-1.8A7 7 0 0 0 12 2Z" /></svg>
           <span>Hint</span>
         </button>
@@ -387,6 +395,7 @@ export default function Hero({ language = 'en', assets }) {
           <button
             className={h.puzzleQuestion}
             data-solved={puzzleSolved}
+            data-analytics-click="puzzle_instructions"
             type="button"
             aria-label={gameInstructions.title}
             onClick={() => instructionsDialogRef.current?.showModal()}

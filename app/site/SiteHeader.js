@@ -22,13 +22,13 @@ export default function SiteHeader({ language = 'en', currentPage = 'home', othe
     <>
       <a className={s.skipLink} href={skipTarget}>{copy.skip}</a>
       <header className={s.header}>
-        <Link href={home} className={s.name}>Fai</Link>
+        <Link href={home} className={s.name} data-analytics-click="nav_home">Fai</Link>
         <nav className={s.links} aria-label={copy.navLabel}>
-          <Link href={section('works')}>{copy.works}</Link>,{' '}
-          <Link href={section('writing')}>{copy.writing}</Link>,{' '}
-          <Link href={section('about')} className={s.about}>{copy.about}</Link><span className={s.about}>, </span>
-          <Link href={section('contact')}>{copy.contact}</Link>
-          <Link href={otherPage} className={s.language}>{copy.language}</Link>
+          <Link href={section('works')} data-analytics-click="nav_works">{copy.works}</Link>,{' '}
+          <Link href={section('writing')} data-analytics-click="nav_writing">{copy.writing}</Link>,{' '}
+          <Link href={section('about')} className={s.about} data-analytics-click="nav_about">{copy.about}</Link><span className={s.about}>, </span>
+          <Link href={section('contact')} data-analytics-click="nav_contact">{copy.contact}</Link>
+          <Link href={otherPage} className={s.language} data-analytics-click="nav_language">{copy.language}</Link>
         </nav>
       </header>
     </>

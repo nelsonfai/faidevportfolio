@@ -1,5 +1,6 @@
 import './globals.css';
 import GlobalFooter from './site/GlobalFooter';
+import Analytics from './site/Analytics';
 
 export const metadata = {
   metadataBase: new URL('https://nelsonfai.space'),
@@ -30,7 +31,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}<GlobalFooter /></body>
+      <body>
+        {children}
+        <GlobalFooter />
+        <Analytics />
+      </body>
     </html>
   );
 }

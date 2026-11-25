@@ -2,7 +2,7 @@ import HomePage from './home-page';
 
 export const metadata = {
   title: 'Nelson Fai',
-  description: 'Full-stack engineer who also writes. Selected works, writing and experiments.',
+  description: 'Day in a life of Fai',
 };
 
 export default function Page() {

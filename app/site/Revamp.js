@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { copy, projects, contact } from './content';
+import { copy, projects, contact, checklist } from './content';
 import SiteHeader from './SiteHeader';
 import { Mark } from './Marks';
 import { Browser } from './Demos';
@@ -67,9 +67,9 @@ function Project({ project, index, language, t }) {
         <p className={s.projectText}>{local.text}</p>
         <p className={s.stack}>{(language === 'de' && project.stackDe) || project.stack}</p>
         <p className={s.links}>
-          {project.view === 'clippy' && <Link className={s.link} href={language === 'de' ? '/de/clippy' : '/clippy'}>{t.projectDetails}<span aria-hidden="true"> →</span></Link>}
-          {project.caseStudy && <Link className={s.link} href={`${t.home}/writing/${project.slug}`}>{t.caseStudy}<span aria-hidden="true"> →</span></Link>}
-          {project.url && <a className={s.link} href={project.url} target="_blank" rel="noreferrer">{t.view} {project.url.replace(/^https?:\/\/(www\.)?/, '')}<span aria-hidden="true"> →</span></a>}
+          {project.view === 'clippy' && <Link className={s.link} href={language === 'de' ? '/de/clippy' : '/clippy'} data-analytics-click="project_details:clippy">{t.projectDetails}<span aria-hidden="true"> →</span></Link>}
+          {project.caseStudy && <Link className={s.link} href={`${t.home}/writing/${project.slug}`} data-analytics-click={`project_case_study:${project.slug}`}>{t.caseStudy}<span aria-hidden="true"> →</span></Link>}
+          {project.url && <a className={s.link} href={project.url} target="_blank" rel="noreferrer" data-analytics-click={`project_visit:${project.slug}`}>{t.view} {project.url.replace(/^https?:\/\/(www\.)?/, '')}<span aria-hidden="true"> →</span></a>}
         </p>
       </div>
     </article>
@@ -137,7 +137,7 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
         <ol className={s.rows}>
           {articles.map((article, index) => (
             <li key={article.slug} className={s.row} data-row="">
-              <Link href={`${t.home}/writing/${article.slug}`} className={s.rowLink}>
+              <Link href={`${t.home}/writing/${article.slug}`} className={s.rowLink} data-analytics-click={`writing_open:${article.slug}`}>
                 <span className={s.rowImage}>
                   {supportsNextImageOptimization(article.image || '/images/apjot-home.png')
                     ? <Image src={article.image || '/images/apjot-home.png'} alt="" fill sizes="(max-width: 760px) 30vw, min(28vw, 380px)" />
@@ -158,7 +158,7 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
           ))}
         </ol>
         {!feedOnline && <p className={`${s.hand} ${s.offline}`}>{t.writingOffline}</p>}
-        <p className={s.writingAll}><a className={s.link} href={contact.apjot} target="_blank" rel="noreferrer">{t.writingAll} · apjot.site<span aria-hidden="true"> →</span></a></p>
+        <p className={s.writingAll}><a className={s.link} href={contact.apjot} target="_blank" rel="noreferrer" data-analytics-click="writing_archive">{t.writingAll} · apjot.site<span aria-hidden="true"> →</span></a></p>
       </section>
 
       <section className={s.contact} id="contact">
@@ -189,11 +189,11 @@ export default function Revamp({ language = 'en', articles = [], feedOnline = tr
           <section className={s.todoNote} aria-labelledby="todo-title">
             <h3 className={s.todoTitle} id="todo-title">{t.todoTitle}</h3>
             <ul className={s.todoList}>
-              {t.todoItems.map((item) => (
-                <li className={s.todoItem} key={item}>
-                  <label>
-                    <input type="checkbox" />
-                    <span>{item}</span>
+              {checklist.map((item) => (
+                <li className={s.todoItem} key={item.id}>
+                  <label htmlFor={`checklist-${item.id}`}>
+                    <input id={`checklist-${item.id}`} type="checkbox" data-checklist-item={item.id} />
+                    <span>{item[language]}</span>
                   </label>
                 </li>
               ))}
